@@ -1,0 +1,29 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  position: relative;
+}
+
+.navbar-left {
+  position: absolute;
+  left: 20px;
+  top: 30px; /* Adjust as needed */
+}
+
+.navbar-right {
+  display: flex;
+}
+
+.nav-link {
+  margin-left: 20px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo {
+  cursor: pointer;
+}
