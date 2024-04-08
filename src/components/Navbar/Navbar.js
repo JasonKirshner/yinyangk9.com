@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import 'Navbar.css';
+import styles from 'Navbar.module.css';
 
 const Navbar = () => {
   return (
