@@ -1,6 +1,6 @@
 // components/Hero.js
 
-import 'Hero.css';
+import styles from "./Hero.module.css";
 
 const Hero = ({ title, description, buttonText1, buttonText2, imageUrl }) => {
   return (
