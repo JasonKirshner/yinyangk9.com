@@ -1,0 +1,30 @@
+.footer-cta {
+  background-color: #ff0000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+h2 {
+  margin: 0 0 10px 0;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #ff0000;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: #fff;
+  color: #ff6666;
+}
