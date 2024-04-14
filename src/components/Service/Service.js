@@ -1,14 +1,6 @@
 // components/Service.js
 
-import { useState } from 'react';
-
 const Service = ({ title, description, backgroundColor, borderColor }) => {
-  const [hovered, setHovered] = useState(false);
-
-  const handleHover = () => {
-    setHovered(!hovered);
-  };
-
   return (
     <div
       className="service"
@@ -16,11 +8,7 @@ const Service = ({ title, description, backgroundColor, borderColor }) => {
     >
       <h2>{title}</h2>
       <p>{description}</p>
-      <button
-        className={hovered ? 'button-hover' : ''}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleHover}
-      >
+      <button className='button-hover'>
         Learn More
       </button>
     </div>

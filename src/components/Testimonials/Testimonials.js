@@ -1,6 +1,6 @@
 // components/Testimonials.js
 
-import Testimonial from './Testimonial';
+import Testimonial from '@/components/Testimonial/Testimonial';
 
 const Testimonials = () => {
   return (
@@ -20,13 +20,6 @@ const Testimonials = () => {
         text1="Fusce euismod consequat ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
         text2="- Mike Smith"
       />
-      <style jsx>{`
-        .testimonials {
-          display: flex;
-          justify-content: space-between;
-          margin: 20px 0;
-        }
-      `}</style>
     </div>
   );
 };
