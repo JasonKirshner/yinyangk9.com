@@ -16,7 +16,8 @@
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
-    "postcss-nesting": "^12.1.2",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.5.9"
   }
 }
