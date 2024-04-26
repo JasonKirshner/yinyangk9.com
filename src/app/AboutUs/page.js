@@ -1,4 +1,4 @@
-import HeroSmall from "@/components/Hero/HeroSmall";
+import HeroSmall from "@/components/HeroSmall/HeroSmall";
 import FooterCTA from "@/components/FooterCTA/FooterCTA";
 import styles from "./page.module.css";
 
