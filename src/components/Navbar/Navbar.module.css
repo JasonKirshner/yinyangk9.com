@@ -1,29 +1,33 @@
 .navbar {
+  height: 70px;
+  border-bottom: 1px solid black;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
-  position: relative;
 }
 
-.navbar-left {
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: flex-end;
+}
+
+.homeLink {
   position: absolute;
   left: 20px;
-  top: 30px; /* Adjust as needed */
+  top: 10px;
 }
 
-.navbar-right {
+.navbarLinks {
   display: flex;
+  align-items: center;
 }
 
-.nav-link {
+.navLink {
   margin-left: 20px;
-  color: #fff;
   text-decoration: none;
+  font-size: 20px;
 }
 
 .logo {
-  cursor: pointer;
+  width: 80px;
 }

@@ -1,37 +1,40 @@
-// components/Navbar.js
+'use client'
 
-import Link from 'next/link';
-import Image from 'next/image';
+import { useState } from 'react'
+import Link from 'next/link'
+
+import { Spin as Hamburger } from 'hamburger-react'
+
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen)
+  }
+
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        {/* <Image
-          src="/logo.png"
-          alt="Logo"
-          width={120}
-          height={40}
-          className="logo"
-        /> */}
-      </div>
-      <div className="navbar-right">
-        <Link className="nav-link" href="/">
-          Home
+    <nav className={styles.navbar}>
+      <div className={`${styles.navbarContainer} container`}>
+        <Link className={styles.homeLink} href="/">
+          <img src="/logo.png" alt="Logo" className={styles.logo} />
         </Link>
-        <Link className="nav-link" href="/about">
-          About
-        </Link>
-        <Link className="nav-link" href="/services">
-          Services
-        </Link>
-        <Link className="nav-link" href="/contact">
-          Contact
-        </Link>
+        <div className={`${styles.navbarLinks}` + (isMenuOpen && `${styles.navbarOpen}`) }>
+          <Link className={styles.navLink} href="/about">
+            About
+          </Link>
+          <Link className={styles.navLink} href="/services">
+            Services
+          </Link>
+          <Link className={`${styles.navLink} button`} href="/contact">
+            Contact Us
+          </Link>
+        </div>
+        <Hamburger toggle={toggleMenu} toggled={isMenuOpen} direction="right" color="#9c8c58" label="Show Menu" />
       </div>
     </nav>
   );
 };
 
-export default Navbar;
+export default Navbar
