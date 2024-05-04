@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link className={styles.homeLink} href="/">
           <img src="/logo.png" alt="Logo" className={styles.logo} />
         </Link>
-        <div className={`${styles.navbarLinks}` + (isMenuOpen && `${styles.navbarOpen}`) }>
+        <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '') }>
           <Link className={styles.navLink} href="/about">
             About
           </Link>
@@ -31,7 +31,9 @@ const Navbar = () => {
             Contact Us
           </Link>
         </div>
-        <Hamburger toggle={toggleMenu} toggled={isMenuOpen} direction="right" color="#9c8c58" label="Show Menu" />
+        <div className={styles.navBurger}>
+          <Hamburger toggle={toggleMenu} toggled={isMenuOpen} direction="right" color="#D52129" label="Show Menu" />
+        </div>
       </div>
     </nav>
   );
