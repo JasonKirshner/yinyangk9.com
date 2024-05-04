@@ -1,6 +1,12 @@
 module.exports = {
   plugins: [
     'postcss-flexbugs-fixes',
+    [
+      '@csstools/postcss-global-data',
+      {
+        files: ['src/lib/css/breakpoints.css'],
+      },
+    ],
     'postcss-nested',
     [
       'postcss-preset-env',
@@ -10,8 +16,8 @@ module.exports = {
         },
         stage: 3,
         features: {
-          'custom-properties': false,
-        },
+          'custom-media-queries': true,
+        }
       },
     ],
   ]
