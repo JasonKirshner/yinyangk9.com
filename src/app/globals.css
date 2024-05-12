@@ -1,6 +1,8 @@
 :root {  
   --red: #D52129;
   --white: #fff;
+  --inter: "Inter", sans-serif;
+  --montserrat: "Montserrat", sans-serif;
 }
 
 * {
@@ -21,7 +23,7 @@ a {
 }
 
 .container {
-  max-width: var(--xl);
+  max-width: 1250px;
   width: 100%;
   margin: 0 auto;
   padding: 0 25px;
@@ -38,7 +40,7 @@ a {
   &--alt {
     background-color: var(--red);
     color: var(--white);
-    border-color: var(--white);
+    border: 2px solid var(--red);
   }
 }
 
@@ -47,7 +49,19 @@ a {
   background-color: var(--red);
 }
 
-.button:hover {
-  color: var(--white);
-  background-color: var(--red);
+.button--alt:hover {
+  color: var(--red);
+  background-color: var(--white);
+}
+
+.h1 {
+  font-size: 55px;
+  font-weight: bold;
+  font-family: var(--montserrat);
+}
+
+.h2 {
+  font-size: 28px;
+  font-family: var(--inter);
+  font-weight: 200;
 }
