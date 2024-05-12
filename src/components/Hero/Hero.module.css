@@ -1,40 +1,54 @@
 .hero {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 70px);
   /* background-image: url('${imageUrl}'); */
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.heroContainer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .content {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 0 20px;
+  width: 100%;
+  max-width: 550px;
+}
+
+.description {
+  margin-top: 20px;
 }
 
 .buttons {
   display: flex;
-  flex-direction: column;
+  margin-top: 20px;
 }
 
-.buttons button {
-  margin-bottom: 10px;
+.aboutUsBtn {
+  margin-left: 10px;
 }
 
-.image-container {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  overflow: hidden;
-}
-
-.image-container img {
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
+.image {
+  max-width: 500px;
+  width: 100%;
+  aspect-ratio: .95;
 }
