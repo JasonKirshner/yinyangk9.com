@@ -58,10 +58,18 @@ a {
   font-size: 55px;
   font-weight: bold;
   font-family: var(--montserrat);
+
+  @media(--lg) {
+    font-size: 45px;
+  }
 }
 
 .h2 {
   font-size: 28px;
   font-family: var(--inter);
   font-weight: 200;
+
+  @media(--lg) {
+    font-size: 23px;
+  }
 }
