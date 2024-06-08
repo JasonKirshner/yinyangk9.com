@@ -1,13 +1,14 @@
-// components/Testimonial.js
+import React from 'react';
+import styles from './Testimonial.module.css';
 
-const Testimonial = ({ imageUrl, text1, text2 }) => {
+const Testimonial = ({ name, text }) => {
   return (
-    <div className="testimonial">
-      {/* <img src={imageUrl} alt="Testimonial" className="image" /> */}
-      <div className="content">
-        <p>{text1}</p>
-        <p>{text2}</p>
+    <div className={styles.testimonial}>
+      <div className={styles.user}>
+        <div className={styles.avatar}></div>
+        <p className={styles.name}>{name}</p>
       </div>
+      <p className={styles.text}>{text}</p>
     </div>
   );
 };
