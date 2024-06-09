@@ -4,11 +4,6 @@
   overflow: hidden;
   background: linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(255,255,255,0) 67%, rgba(255,255,255,1) 100%);
   height: calc(100vh - 70px);
-
-  @media(--lg) {
-    height: 50vh;
-    min-height: 600px;
-  }
 }
 
 .bgImage {
@@ -26,7 +21,8 @@
   align-items: center;
   justify-content: space-between;
   
-  @media(--lg) {
+  @media(--md) {
+    flex-direction: column-reverse;
     justify-content: center;
   }
 }
@@ -60,6 +56,11 @@
   aspect-ratio: .95;
   
   @media(--lg) {
+    margin-bottom: 30px;
     max-width: 360px;
+  }
+
+  @media(--md) {
+    max-width: 260px;
   }
 }
