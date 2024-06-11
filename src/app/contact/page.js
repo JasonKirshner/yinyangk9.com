@@ -6,7 +6,10 @@ import styles from "./page.module.css";
 export default function Contact() {
   return (
     <main className={styles.main}>
-      <HeroSmall />
+      <HeroSmall 
+        headerText="Contact Us"
+        backgroundImage="/hero_about_us.png"
+      />
       <ContactForm />
       <FooterCTA />
     </main>

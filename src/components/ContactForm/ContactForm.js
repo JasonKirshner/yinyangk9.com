@@ -15,6 +15,7 @@ const ContactUsForm = () => {
 
   return (
     <div className="container">
+        <label className={styles.label}>Lets hear about you pup!</label>
         <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.inputGroup}>
             <Input
@@ -55,9 +56,11 @@ const ContactUsForm = () => {
             fullWidth
             />
         </div>
-        <button type="submit" className="button">
-            Send
-        </button>
+        <div className={styles.buttonContainer}>
+            <button type="submit" className="button">
+                Send
+            </button>
+        </div>
         </form>
     </div>
   );
