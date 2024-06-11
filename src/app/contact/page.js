@@ -11,7 +11,6 @@ export default function Contact() {
         backgroundImage="/smart-dog.png"
       />
       <ContactForm />
-      <FooterCTA />
     </main>
   );
 }
