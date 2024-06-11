@@ -54,6 +54,7 @@ const ContactUsForm = () => {
             />
             <Textarea
             required
+            minRows={5}
             label="How Can We Help?"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
