@@ -36,6 +36,7 @@ a {
   background-color: var(--white);
   color: var(--red);
   transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
+  cursor: pointer;
 
   &--alt {
     background-color: var(--red);
