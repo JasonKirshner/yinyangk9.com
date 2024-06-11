@@ -1,12 +1,12 @@
 "use client";
 
-import React from 'react';
+import { useState } from 'react';
 import { Input, Textarea } from "@nextui-org/react";
 import styles from './ContactForm.module.css'; // Adjust the path as necessary
 
 const ContactUsForm = () => {
-  const [dogName, setDogName] = React.useState("");
-  const [message, setMessage] = React.useState("");
+  const [dogName, setDogName] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,53 +14,59 @@ const ContactUsForm = () => {
   };
 
   return (
-    <div className="container">
-        <label className={styles.label}>Lets hear about you pup!</label>
+      <div className={`container ${styles.contactContainer}`}>
+        <h3 className="h3">Lets hear about you pup!</h3>
         <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
             <Input
-            required
-            type="text"
-            label="Name"
-            className={styles.input}
-            fullWidth
+                required
+                type="text"
+                label="Name"
+                classNames={{
+                    base: styles.fieldWrapper,
+                    label: [styles.label, 'input-label'],
+                    input: styles.input
+                }}
+                fullWidth
             />
-        </div>
-        <div className={styles.inputGroup}>
             <Input
             required
             type="text"
             label="Dog's Name"
             value={dogName}
             onChange={(e) => setDogName(e.target.value)}
-            className={styles.input}
+            classNames={{
+                base: styles.fieldWrapper,
+                label: [styles.label, 'input-label'],
+                input: styles.input
+            }}
             fullWidth  
             />
-        </div>
-        <div className={styles.inputGroup}>
             <Input
             required
             type="tel"
             label="Phone Number"
-            className={styles.input}
+            classNames={{
+                base: styles.fieldWrapper,
+                label: [styles.label, 'input-label'],
+                input: styles.input
+            }}
             fullWidth
             />
-        </div>
-        <div className={styles.inputGroup}>
             <Textarea
             required
             label="How Can We Help?"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className={styles.textarea}
+            classNames={{
+                base: styles.fieldWrapper,
+                label: [styles.label, 'input-label'],
+                input: styles.textarea
+            }}
             fullWidth
             />
-        </div>
-        <div className={styles.buttonContainer}>
-            <button type="submit" className="button">
+              <button type="submit" className={`button ${styles.sendBtn}`}>
                 Send
             </button>
-        </div>
         </form>
     </div>
   );

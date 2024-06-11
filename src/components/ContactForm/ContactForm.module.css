@@ -1,15 +1,23 @@
+.contactContainer {
+  max-width: 924px;
+  margin: 75px auto;
+
+  @media(--md) {
+    margin: 50px auto;
+  }
+}
+
 .form {
   width: 100%;
   padding: 20px;
-  border: 2px solid #000000;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: gray;
+  background-color: var(--gray);
   margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.inputGroup {
-  margin-bottom: 15px;
+.fieldWrapper {
   width: 100%;
 }
 
@@ -17,33 +25,31 @@
   display: block;
   margin-top: 50px;
   margin-bottom: 5px;
-  font-weight: bold;
-  font-size: 28px;
 }
 
-.inputGroup input,
-.inputGroup textarea {
-  width: 100% !important;
+.input {
+  width: 100%;
+  border: none;
   padding: 10px;
   border-radius: 3px;
   box-sizing: border-box;
 }
 
+.label {
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
 .textarea {
-  height: 100px;
-  resize: vertical;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: center;
-  color: white;
-  padding: 10px 20px;
+  width: 100%;
   border: none;
+  padding: 10px;
   border-radius: 3px;
-  cursor: pointer;
+  box-sizing: border-box;
+  height: 100px;
+  resize: none;
 }
 
-.button:hover {
-  background-color: #0056b3;
+.sendBtn {
+  margin-top: 20px;
 }
