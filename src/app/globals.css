@@ -1,6 +1,8 @@
 :root {  
   --red: #D52129;
   --white: #fff;
+  --black: #000;
+  --gray: #D5D5D4;
   --inter: "Inter", sans-serif;
   --montserrat: "Montserrat", sans-serif;
 }
@@ -33,9 +35,12 @@ a {
   padding: 10px 25px;
   border: 2px solid var(--red);
   border-radius: 50px;
-  background-color: var(--white);
+  min-width: 171px;
+  text-align: center;
+  background-color: transparent;
   color: var(--red);
   transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
+  cursor: pointer;
 
   &--alt {
     background-color: var(--red);
@@ -51,7 +56,7 @@ a {
 
 .button--alt:hover {
   color: var(--red);
-  background-color: var(--white);
+  background-color: transparent;
 }
 
 .h1 {
@@ -71,5 +76,25 @@ a {
 
   @media(--lg) {
     font-size: 23px;
+  }
+}
+
+.h3 {
+  font-size: 24px;
+  font-family: var(--inter);
+  font-weight: bold;
+
+  @media(--lg) {
+    font-size: 21px;
+  }
+}
+
+.input-label {
+  font-size: 18px;
+  font-family: var(--inter);
+  font-weight: regular;
+
+  @media(--lg) {
+    font-size: 16px;
   }
 }

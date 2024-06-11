@@ -1,0 +1,33 @@
+.heroSmall {
+  position: relative;
+  height: 312px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  @media(--md) {
+    min-height: 240px;
+    height: 30vh;
+  }
+}
+
+.bgImage {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  @media(--md) {
+    object-position: 15% 20%;
+  }
+}
+
+.headerText {
+  color: var(--white);
+}
