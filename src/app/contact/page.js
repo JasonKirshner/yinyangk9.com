@@ -11,7 +11,6 @@ export default function Contact() {
         backgroundImage="/hero_about_us.png"
       />
       <ContactForm />
-      <FooterCTA />
     </main>
   );
 }

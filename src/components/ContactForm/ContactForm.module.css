@@ -46,8 +46,8 @@
   padding: 10px;
   border-radius: 3px;
   box-sizing: border-box;
-  height: 100px;
   resize: none;
+  height: 100px;
 }
 
 .sendBtn {
