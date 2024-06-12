@@ -1,0 +1,17 @@
+[
+  {
+    "image": "./avatar.png",
+    "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    "name": "John Doe"
+  },
+  {
+    "image": "./avatar.png",
+    "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    "name": "John Doe"
+  },
+  {
+    "image": "./avatar.png",
+    "testimony": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+    "name": "John Doe"
+  }
+]

@@ -5,6 +5,8 @@ import Testimonials from "@/components/Testimonials/Testimonials";
 
 import styles from "./page.module.css";
 
+import testimonials from '../lib/data/testimonials.json';
+
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -16,7 +18,7 @@ export default function Home() {
         buttonText1="Contact Us"
         buttonText2="About Us"
       />
-      <Testimonials />
+      <Testimonials title="Testimonials" testimonials={testimonials} />
       <Services />
       <FooterCTA />
     </main>
