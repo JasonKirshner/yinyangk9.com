@@ -1,28 +1,56 @@
 .footerCTA {
-  background-color: #D52129;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--red);
   padding: 20px;
   text-align: center;
   margin: 20px 0;
 }
 
+.footer-cta .footer-content {
+  position: relative;
+  z-index: 1; /* Ensures the content stays above the paw images */
+}
+
 .footerCTA h2 {
-  color: #ffffff;
+  color: var(--white);
   margin-bottom: 10px;
 }
 
 .footerCTA button {
   padding: 10px 25px;
-  border: 2px solid #ffffff;
+  border: 2px solid var(--white);
   border-radius: 50px;
-  min-width: 171px;
+  width: 171px;
   text-align: center;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--white);
   transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
   cursor: pointer;
 }
 
-
 .footerCTA button:hover {
   background-color: #eeeeee;
 } 
+
+.footerCTA .pawTopLeft {
+  top: 10px;
+  left: 10px;
+}
+
+.footerCTA .pawBottomLeft {
+  bottom: 10px;
+  left: 10px;
+}
+
+.footerCTA .pawTopRight {
+  top: 10px;
+  right: 10px;
+}
+
+.footerCTA .pawBottomRight {
+  bottom: 10px;
+  right: 10px;
+}
