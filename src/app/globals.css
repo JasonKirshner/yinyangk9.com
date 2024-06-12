@@ -3,6 +3,7 @@
   --white: #fff;
   --black: #000;
   --gray: #D5D5D4;
+  --blue: #4B80C2;
   --inter: "Inter", sans-serif;
   --montserrat: "Montserrat", sans-serif;
 }
@@ -92,6 +93,15 @@ a {
 
   @media(--lg) {
     font-size: 21px;
+  }
+}
+
+.p, p {
+  font-size: 18px;
+  font-family: var(--inter);
+
+  @media(--lg) {
+    font-size: 16px;
   }
 }
 
