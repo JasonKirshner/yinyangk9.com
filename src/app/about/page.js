@@ -24,7 +24,10 @@ export default function AboutUs() {
       image1="/family-image1.png"
       image2="/petting-dog.png"
       />
-      <FooterCTA />
+      <FooterCTA 
+      title="We're here to help!"
+      buttonText="Contact Us"
+      />
     </main>
   );
 }

@@ -1,30 +1,28 @@
-.footer-cta {
-  background-color: #ff0000;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.footerCTA {
+  background-color: #D52129;
   padding: 20px;
-  border-radius: 10px;
+  text-align: center;
   margin: 20px 0;
 }
 
-h2 {
-  margin: 0 0 10px 0;
+.footerCTA h2 {
+  color: #ffffff;
+  margin-bottom: 10px;
 }
 
-button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  background-color: #fff;
-  color: #ff0000;
-  border: none;
+.footerCTA button {
+  padding: 10px 25px;
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+  min-width: 171px;
+  text-align: center;
+  background-color: transparent;
+  color: #ffffff;
+  transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
 }
 
-button:hover {
-  background-color: #fff;
-  color: #ff6666;
-}
+
+.footerCTA button:hover {
+  background-color: #eeeeee;
+} 
