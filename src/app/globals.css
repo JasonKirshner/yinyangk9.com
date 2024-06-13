@@ -42,7 +42,7 @@ a {
   padding: 10px 25px;
   border: 2px solid var(--red);
   border-radius: 50px;
-  min-width: 171px;
+  min-width: 150px;
   text-align: center;
   background-color: transparent;
   color: var(--red);
@@ -52,6 +52,16 @@ a {
   &--alt {
     background-color: var(--red);
     color: var(--white);
+  }
+
+  &--secondary {
+    border-color: var(--white);
+    color: var(--white);
+
+    &:hover {
+      background-color: var(--white);
+      color: var(--red);
+    }
   }
 }
 
@@ -63,6 +73,11 @@ a {
 .button--alt:hover {
   color: var(--red);
   background-color: transparent;
+}
+
+.button--secondary:hover {
+  background-color: var(--white);
+  color: var(--red);
 }
 
 .h1 {
