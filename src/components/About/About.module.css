@@ -1,0 +1,39 @@
+.about {
+  display: flex;
+  align-items: flex-start; 
+  justify-content: center;
+  padding: 20px;
+  flex-direction: row; /* Display items in a row */
+  margin: 20px;
+}
+
+.text {
+  flex: 1;
+  padding-right: 20px;
+  max-width: 50%; /* Adjust the width to fit side by side */
+  align-self: flex-start;
+}
+
+.text h2 {
+  margin-bottom: 1em;
+}
+
+.text p {
+  margin-bottom: 1em; /* Add margin at the bottom of each paragraph */
+}
+
+.images {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%; /* Adjust the width to fit side by side */
+  justify-content: flex-start;
+}
+
+.img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  object-fit: cover;
+}
