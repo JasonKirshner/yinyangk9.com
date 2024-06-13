@@ -1,6 +1,4 @@
-// components/FooterCTA.js
-
-import styles from './FooterCTA.module.css'; // Adjust the path as necessary
+import styles from './FooterCTA.module.css';
 import Link from 'next/link'
 
 const FooterCTA = ({ title, buttonText }) => {
