@@ -17,7 +17,7 @@ const Testimonials = ({ title, testimonials }) => {
   return (
     <div className={styles.testimonialsWrapper}>
       <div className={`container ${styles.testimonialsContainer}`}>
-        <h2 className={styles.title}>{ title }</h2>
+        <h3 className={styles.title}>{ title }</h3>
         <div className={styles.testimonials}>
           {renderTestimonials()}
         </div>
