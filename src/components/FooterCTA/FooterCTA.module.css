@@ -2,7 +2,11 @@
   background-color: var(--red);
   padding: 50px 0;;
   text-align: center;
-  margin: 20px 0;
+  margin: 100px 0;
+
+  @media(--md) {
+    margin: 60px 0;
+  }
 }
 
 .footerCTAcontainer {
