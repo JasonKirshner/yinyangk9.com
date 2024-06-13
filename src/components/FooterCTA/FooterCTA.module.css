@@ -1,56 +1,63 @@
 .footerCTA {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: var(--red);
-  padding: 20px;
+  padding: 50px 0;;
   text-align: center;
   margin: 20px 0;
 }
 
-.footer-cta .footer-content {
+.footerCTAcontainer {
   position: relative;
-  z-index: 1; /* Ensures the content stays above the paw images */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.footerCTA h2 {
+.title {
   color: var(--white);
-  margin-bottom: 10px;
 }
 
-.footerCTA button {
-  padding: 10px 25px;
-  border: 2px solid var(--white);
-  border-radius: 50px;
-  width: 171px;
-  text-align: center;
-  background-color: transparent;
-  color: var(--white);
-  transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
-  cursor: pointer;
+.footerCTAbtn {
+  margin-top: 30px;
+  display: block;
 }
 
-.footerCTA button:hover {
-  background-color: #eeeeee;
-} 
+.pawsLeft {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 200px;
 
-.footerCTA .pawTopLeft {
-  top: 10px;
-  left: 10px;
+  @media(--lg) {
+    width: 150px;
+  }
+
+  @media(--md-min) {
+    transform: translateY(-50%);
+  }
+
+  @media(--md) {
+    width: 100px;
+    top: 60%;
+  }
 }
 
-.footerCTA .pawBottomLeft {
-  bottom: 10px;
-  left: 10px;
-}
+.pawsRight {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 200px;
 
-.footerCTA .pawTopRight {
-  top: 10px;
-  right: 10px;
-}
+  @media(--lg) {
+    width: 150px;
+  }
+  
+  @media(--md-min) {
+    transform: translateY(-50%);
+  }
 
-.footerCTA .pawBottomRight {
-  bottom: 10px;
-  right: 10px;
+  @media(--md) {
+    width: 100px;
+    top: 60%;
+  }
 }
