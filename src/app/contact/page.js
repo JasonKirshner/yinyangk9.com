@@ -8,7 +8,7 @@ export default function Contact() {
     <main className={styles.main}>
       <HeroSmall 
         headerText="Contact Us"
-        backgroundImage="/hero_about_us.png"
+        backgroundImage="/smart-dog.png"
       />
       <ContactForm />
     </main>

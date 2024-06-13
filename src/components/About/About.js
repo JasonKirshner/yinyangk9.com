@@ -1,15 +1,19 @@
 // components/About.js
 
-const About = ({ title, paragraph, image1, image2 }) => {
+import styles from './About.module.css'; // Adjust the path as necessary
+
+const About = ({ title, paragraphs, image1, image2 }) => {
   return (
-    <div className="about">
-      <div className="text">
+    <div className={styles.about}>
+      <div className={styles.text}>
         <h2>{title}</h2>
-        <p>{paragraph}</p>
+        {paragraphs.map((para, index) => (
+        <p key={index}>{para}</p>
+        ))}
       </div>
-      <div className="images">
-        <img src={image1} alt="Image 1" />
-        <img src={image2} alt="Image 2" />
+      <div className={styles.images}>
+        <img className={styles.img} src={image1} alt="Image 1" />
+        <img className={styles.img} src={image2} alt="Image 2" />
       </div>
     </div>
   );
