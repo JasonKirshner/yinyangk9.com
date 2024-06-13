@@ -3,6 +3,7 @@
   --white: #fff;
   --black: #000;
   --gray: #D5D5D4;
+  --blue: #4B80C2;
   --inter: "Inter", sans-serif;
   --montserrat: "Montserrat", sans-serif;
 }
@@ -41,7 +42,7 @@ a {
   padding: 10px 25px;
   border: 2px solid var(--red);
   border-radius: 50px;
-  min-width: 171px;
+  min-width: 150px;
   text-align: center;
   background-color: transparent;
   color: var(--red);
@@ -51,7 +52,16 @@ a {
   &--alt {
     background-color: var(--red);
     color: var(--white);
-    border: 2px solid var(--red);
+  }
+
+  &--secondary {
+    border-color: var(--white);
+    color: var(--white);
+
+    &:hover {
+      background-color: var(--white);
+      color: var(--red);
+    }
   }
 }
 
@@ -65,6 +75,11 @@ a {
   background-color: transparent;
 }
 
+.button--secondary:hover {
+  background-color: var(--white);
+  color: var(--red);
+}
+
 .h1 {
   font-size: 55px;
   font-weight: bold;
@@ -75,7 +90,7 @@ a {
   }
 }
 
-.h2 {
+.h2, h2 {
   font-size: 28px;
   font-family: var(--inter);
   font-weight: 200;
@@ -85,13 +100,33 @@ a {
   }
 }
 
-.h3 {
+.h3, h3 {
+  font-size: 24px;
+  font-family: var(--montserrat);
+  font-weight: bold;
+
+  @media(--lg) {
+    font-size: 21px;
+  }
+}
+
+.h4, h4 {
   font-size: 24px;
   font-family: var(--inter);
   font-weight: bold;
 
   @media(--lg) {
     font-size: 21px;
+  }
+}
+
+.p, p {
+  font-size: 18px;
+  font-family: var(--inter);
+  font-weight: 300;
+
+  @media(--lg) {
+    font-size: 16px;
   }
 }
 

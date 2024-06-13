@@ -1,29 +1,17 @@
-// components/FooterCTA.js
-
-import styles from './FooterCTA.module.css'; // Adjust the path as necessary
+import styles from './FooterCTA.module.css';
 import Link from 'next/link'
 
-const FooterCTA = ({ title, buttonText }) => {
+const FooterCTA = () => {
   return (
     <div className={styles.footerCTA}>
-      <div className={styles.footerContent}>
-        <h2 className={styles.h2}>{title}</h2>
-        <Link href="/contact"><button className={styles.button} href="/contact">{buttonText}</button></Link>
+      <div className={`${styles.footerCTAcontainer} container`}>
+        <h2 className={`h1 ${styles.title}`}>We&apos;re Here To Help</h2>
+        <Link href="/contact" className={`button button--secondary ${styles.footerCTAbtn}`}>
+          Contact Us
+        </Link>
+        <img src="paws_left.png" alt="Paws Left" className={styles.pawsLeft} />
+        <img src="paws_right.png" alt="Paws Right" className={styles.pawsRight} />
       </div>
-
-      <div className={styles.pawTopLeft}>
-        <img src="Paw.png" alt="Paw 1"/>
-      </div>
-      <div className={styles.pawBottomLeft}>
-        <img src="Paw.png" alt="Paw 2"/>
-      </div>
-      <div className={styles.pawTopRight}>
-        <img src="Paw.png" alt="Paw 3"/>
-      </div>
-      <div className="paw paw-bottom-right">
-        <img src="Paw.png" alt="Paw 4"/>
-      </div>
-
     </div>
   );
 };

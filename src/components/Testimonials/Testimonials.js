@@ -2,23 +2,25 @@ import React from 'react';
 import styles from './Testimonials.module.css';
 import Testimonial from '../Testimonial/Testimonial';
 
-const Testimonials = () => {
+const Testimonials = ({ title, testimonials }) => {
+  
+  const renderTestimonials = () =>  
+    testimonials.map((testimonial, i) => (
+      <Testimonial
+        key={i}
+        name={testimonial.name}
+        text={testimonial.testimony}
+        image={testimonial.image}
+      />
+    ))
+
   return (
-    <div className="container">
-      <h2 className="title">Testimonials</h2>
-      <div className={styles.testimonials}>
-        <Testimonial
-          name="John Doe"
-          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-        />
-        <Testimonial
-          name="John Doe"
-          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-        />
-        <Testimonial
-          name="John Doe"
-          text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-        />
+    <div className={styles.testimonialsWrapper}>
+      <div className={`container ${styles.testimonialsContainer}`}>
+        <h3 className={styles.title}>{ title }</h3>
+        <div className={styles.testimonials}>
+          {renderTestimonials()}
+        </div>
       </div>
     </div>
   );
