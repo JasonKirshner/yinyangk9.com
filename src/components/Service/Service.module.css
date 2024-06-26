@@ -61,3 +61,13 @@
 .serviceButton {
   margin-top: auto;
 }
+
+.images {
+  width: 581px;
+  height: 400px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%; /* Adjust the width to fit side by side */
+  justify-content: flex-start;
+}
