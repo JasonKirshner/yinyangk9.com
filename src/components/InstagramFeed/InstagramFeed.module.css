@@ -1,0 +1,23 @@
+.instagramFeed {
+  margin-top: 100px;
+}
+
+.feedContainer {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feed {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}

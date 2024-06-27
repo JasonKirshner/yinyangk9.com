@@ -2,11 +2,12 @@ import FooterCTA from "@/components/FooterCTA/FooterCTA";
 import Hero from "@/components/Hero/Hero";
 import Services from "@/components/Services/Services";
 import Testimonials from "@/components/Testimonials/Testimonials";
+import InstagramFeed from "@/components/InstagramFeed/InstagramFeed"
 
 import styles from "./page.module.css";
 
-import testimonials from '../lib/data/testimonials.json';
-import services from '../lib/data/services.json';
+import testimonials from '@/lib/data/testimonials.json';
+import services from '@/lib/data/services.json';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       />
       <Testimonials title="Testimonials" testimonials={testimonials} />
       <Services title="Services" services={services} />
+      <InstagramFeed />
       <FooterCTA />
     </main>
   );
