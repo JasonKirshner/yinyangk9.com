@@ -1,7 +1,6 @@
 import HeroSmall from "@/components/HeroSmall/HeroSmall";
 import FooterCTA from "@/components/FooterCTA/FooterCTA";
 import About from "@/components/About/About";
-import styles from "./page.module.css";
 
 const aboutParagraphs = [
   "Jordyn and Dylan are San Diego natives who met at a dog training facility in 2019 and haven’t stopped training together since. They spent two years mentoring under Pack Method Prep, one of San Diego’s premier dog training academies. They have also shadowed an array of trainers, learning the different methodologies of training, and getting hands-on experience with dogs of all behavioral issues. This helped them to develop their own unique training approach, and in 2022, Yin Yang K9 was born.",
@@ -13,7 +12,7 @@ const aboutParagraphs = [
 
 export default function AboutUs() {
   return (
-    <main className={styles.main}>
+    <main>
       <HeroSmall 
       headerText="About Us"
       backgroundImage="hero_about_us.png"
