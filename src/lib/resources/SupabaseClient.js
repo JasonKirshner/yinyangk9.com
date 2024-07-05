@@ -1,44 +1,71 @@
-import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { createServerClient, serializeCookieHeader } from '@supabase/ssr'
+import { setCookie, getCookie, hasCookie } from 'cookies-next'
 
-class SupabaseClient {
-  constructor() {
-    let cookieStore = cookies()
+import { oneDayInFuture, responseErrorHandler } from '../util/util'
 
-    this.supabase = createServerClient(
-      process.env.SUPABASE_URL,
-      process.env.SUPABASE_ANON_KEY,
-      {
-        cookies: {
-          getAll() {
-            return cookieStore.getAll()
-          },
-          setAll(cookiesToSet) {
-            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options))
-          }
+const initSupabaseClient = (req, res) => {
+  return createServerClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY,
+    {
+      cookies: {
+        getAll() {
+          return Object.keys(req.cookies)
+          .map((name) => ({ name, value: req.cookies[name] }))
         },
-      }
-    )
-  }
-
-  async getAccessToken() {
-    try {
-      const response = await this.supabase.from('ApiToken').select('*')
-      if (response.error) {
-        console.error("Error occurred while fetching from db - HttpStatus: " + response.status + " | Message: " + error)
-        return { errorRes: response.error }
-      } else if (response.statusText != 'OK' || response.status > 399) {
-        console.error("Error occurred while fetching from db - HttpStatus: " + response.status)
-        return { errorRes: "Error fetching from db" }
-      } else if (response.data === null || response.data.length < 1) {
-        console.error("Error occurred while fetching from db - HttpStatus: " + response.status + " | Message: " + "data is missing")
-        return { errorRes: "Error fetching from db - data missing" }
-      }
-      return { data: response.data }
-    } catch (error) {
-      return { errorRes: "Error fetching from db - Message: " + error }
+        setAll(cookiesToSet) {
+          res.setHeader('Set-Cookie',
+            cookiesToSet.map(({ name, value, options }) =>
+              serializeCookieHeader(name, value, options)))
+        }
+      },
     }
-  }
+  )
 }
 
-export default SupabaseClient
+export const getAccessToken = async (req, res) => {
+  let accessTokenObj
+  
+  if (hasCookie('accessTokenStore', { req, res })) {
+    const accessTokenStore = getCookie('accessTokenStore', { req, res })
+
+    if (accessTokenStore.errorRes === null && accessTokenStore.token?.length > 0) {
+      return accessTokenStore.token
+    }
+    
+    return null
+  }
+
+  try {
+    const supabaseClient = await initSupabaseClient(req, res)
+    
+    const response = await supabaseClient.from('ApiToken').select('*')
+    
+    responseErrorHandler(response, 'Supabase Api')
+
+    const accessToken = response.data[0].access_token
+    accessTokenObj = { token: accessToken, errorRes: null }
+
+    setCookie('accessTokenStore', accessTokenObj, {
+      req,
+      res,
+      httpOnly: true,
+      expires: oneDayInFuture()
+    })
+
+    return accessToken
+  } catch (error) {
+    console.error(error)
+
+    accessTokenObj = { token: null, errorRes: error }
+    
+    setCookie('accessTokenStore', accessTokenObj, {
+      req,
+      res,
+      httpOnly: true,
+      expires: oneDayInFuture()
+    })
+
+    return null
+  }
+}
