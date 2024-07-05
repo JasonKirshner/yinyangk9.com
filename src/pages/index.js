@@ -4,10 +4,17 @@ import Services from "@/components/Services/Services";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import InstagramFeed from "@/components/InstagramFeed/InstagramFeed"
 
+import getInstagramFeed from "@/lib/resources/InstagramBasicDisplayClient";
 import testimonials from '@/lib/data/testimonials.json';
 import services from '@/lib/data/services.json';
 
-export default function Home() {
+export async function getServerSideProps({ req, res }) {
+  const instagramFeed = await getInstagramFeed(req, res)
+
+  return { props: { instagramFeed } }
+}
+
+export default function Home({ instagramFeed }) {
   return (
     <main>
       <Hero
@@ -20,7 +27,7 @@ export default function Home() {
       />
       <Testimonials title="Testimonials" testimonials={testimonials} />
       <Services title="Services" services={services} />
-      {/* instagramFeed !== null && <InstagramFeed instagramFeed={instagramFeed} /> */}
+      { instagramFeed !== null && <InstagramFeed instagramFeed={instagramFeed} /> }
       <FooterCTA />
     </main>
   );
