@@ -1,4 +1,5 @@
 import { oneDayInSeconds, responseErrorHandler } from '../js/util'
+import { IBD_REFRESH_TOKEN_URI } from '../js/constants'
 import instagramFeedTestData from "../data/instagramFeed.json"
 import { getAccessToken } from "./SupabaseClient"
 
@@ -21,6 +22,24 @@ export default async function getInstagramFeed(req, res) {
     return instagramFeed
   } catch (err) {
     console.error("Error fetching Instagram feed:", err.message)
+
+    return null
+  }
+}
+
+export async function refreshToken(accessToken) {
+  const refreshTokenUrl = IBD_REFRESH_TOKEN_URI + accessToken
+
+  try {
+    const refreshTokenResponse = await fetch(refreshTokenUrl)
+    const refreshTokenObject = await refreshTokenResponse.json()
+    const newAccessToken = refreshTokenObject.access_token
+
+    responseErrorHandler(refreshTokenResponse, 'Refreshing Instagram Basic Display Access Token')
+    
+    return newAccessToken
+  } catch (err) {
+    console.error("Error refreshing IBD access token:", err.message)
 
     return null
   }
