@@ -1,4 +1,4 @@
-import { oneDayInSeconds, responseErrorHandler } from '../util/util'
+import { oneDayInSeconds, responseErrorHandler } from '../js/util'
 import instagramFeedTestData from "../data/instagramFeed.json"
 import { getAccessToken } from "./SupabaseClient"
 

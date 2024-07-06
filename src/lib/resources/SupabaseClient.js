@@ -1,7 +1,7 @@
 import { createServerClient, serializeCookieHeader } from '@supabase/ssr'
 import { setCookie, getCookie, hasCookie } from 'cookies-next'
 
-import { oneDayInFuture, responseErrorHandler } from '../util/util'
+import { oneDayInFuture, responseErrorHandler } from '../js/util'
 
 const initSupabaseClient = (req, res) => {
   return createServerClient(
