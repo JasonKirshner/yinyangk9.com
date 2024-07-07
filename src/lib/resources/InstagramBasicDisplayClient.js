@@ -1,6 +1,6 @@
 import { getCookie, hasCookie } from 'cookies-next'
 
-import { oneDayInSeconds, responseErrorHandler } from '../js/util'
+import { oneDayInSeconds, responseErrorHandler, validation } from '../js/util'
 import { IBD_REFRESH_TOKEN_URI } from '../js/constants'
 import instagramFeedTestData from "../data/instagramFeed.json"
 import { getAccessToken } from "./SupabaseClient"
@@ -19,20 +19,22 @@ export default async function getInstagramFeed(req, res) {
         } else {
           accessToken = accessTokenStore.token
         }
+      } else {
+        accessToken = await getAccessToken(req, res)
       }
     } else {
       accessToken = await getAccessToken(req, res)
     }
 
-    if (accessToken === null) {
+    if (!validation(accessToken)) {
       return null
     }
       
     const url = process.env.INSTAGRAM_BASIC_DISPLAY_API_URI + accessToken
     const response = await fetch(url, { next: { revalidate: oneDayInSeconds() } })
-
+    
     responseErrorHandler(response, 'Instagram Basic Display Api')
-
+    
     const instagramFeed = await response.json()
     instagramFeed.data.push.apply(instagramFeed.data, instagramFeedTestData)
 
