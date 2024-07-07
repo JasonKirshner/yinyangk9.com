@@ -1,11 +1,28 @@
+import { getCookie, hasCookie } from 'cookies-next'
+
 import { oneDayInSeconds, responseErrorHandler } from '../js/util'
 import { IBD_REFRESH_TOKEN_URI } from '../js/constants'
 import instagramFeedTestData from "../data/instagramFeed.json"
 import { getAccessToken } from "./SupabaseClient"
 
+
 export default async function getInstagramFeed(req, res) {
   try {
-    const accessToken = await getAccessToken(req, res)
+    let accessToken
+
+    if (hasCookie('accessTokenStore', { req, res })) {
+      const accessTokenStore = getCookie('accessTokenStore', { req, res })
+  
+      if (accessTokenStore.errorRes === null && accessTokenStore.token?.length > 0) {
+        if (needTokenRefresh(accessTokenStore.lastUpdate)) {
+          accessToken = await refreshToken(accessTokenStore.token)
+        } else {
+          accessToken = accessTokenStore.token
+        }
+      }
+    } else {
+      accessToken = await getAccessToken(req, res)
+    }
 
     if (accessToken === null) {
       return null
@@ -43,4 +60,17 @@ export async function refreshToken(accessToken) {
 
     return null
   }
+}
+
+const needTokenRefresh = (lastUpdate) => {
+  const lastUpdateDate = new Date.parse(lastUpdate)
+  const currentDate = new Date.now()
+
+  const daysSinceLastUpdate = currentDate - lastUpdateDate
+
+  if (daysSinceLastUpdate >= thirtyDaysInMilliseconds()) {
+    return true
+  }
+
+  return false
 }

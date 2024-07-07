@@ -1,5 +1,5 @@
 import { createServerClient, serializeCookieHeader } from '@supabase/ssr'
-import { setCookie, getCookie, hasCookie } from 'cookies-next'
+import { setCookie } from 'cookies-next'
 
 import { oneDayInFuture, responseErrorHandler } from '../js/util'
 
@@ -25,16 +25,6 @@ const initSupabaseClient = (req, res) => {
 
 export const getAccessToken = async (req, res) => {
   let accessTokenObj
-  
-  if (hasCookie('accessTokenStore', { req, res })) {
-    const accessTokenStore = getCookie('accessTokenStore', { req, res })
-
-    if (accessTokenStore.errorRes === null && accessTokenStore.token?.length > 0) {
-      return accessTokenStore.token
-    }
-    
-    return null
-  }
 
   try {
     const supabaseClient = await initSupabaseClient(req, res)
@@ -44,7 +34,8 @@ export const getAccessToken = async (req, res) => {
     responseErrorHandler(response, 'Supabase Api')
 
     const accessToken = response.data[0].access_token
-    accessTokenObj = { token: accessToken, errorRes: null }
+    const lastUpdate = response.data[0].updated_at
+    accessTokenObj = { token: accessToken, lastUpdate: lastUpdate, errorRes: null }
 
     setCookie('accessTokenStore', accessTokenObj, {
       req,
