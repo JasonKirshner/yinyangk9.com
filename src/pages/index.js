@@ -7,6 +7,7 @@ import InstagramFeed from "@/components/InstagramFeed/InstagramFeed"
 import getInstagramFeed from "@/lib/resources/InstagramBasicDisplayClient";
 import testimonials from '@/lib/data/testimonials.json';
 import services from '@/lib/data/services.json';
+import { validation } from '@/lib/js/util'
 
 export async function getServerSideProps({ req, res }) {
   const instagramFeed = await getInstagramFeed(req, res)
@@ -27,7 +28,7 @@ export default function Home({ instagramFeed }) {
       />
       <Testimonials title="Testimonials" testimonials={testimonials} />
       <Services title="Services" services={services} />
-      { instagramFeed !== null && <InstagramFeed instagramFeed={instagramFeed} /> }
+      { validation(instagramFeed) && <InstagramFeed instagramFeed={instagramFeed} /> }
       <FooterCTA />
     </main>
   );
