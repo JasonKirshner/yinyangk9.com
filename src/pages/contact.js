@@ -10,7 +10,7 @@ export default function Contact() {
     <main>
       <HeroSmall 
         headerText="Contact Us"
-        backgroundImage="/smart-dog.png"
+        backgroundImage="/smart-dog.gif"
       />
       <ContactForm />
     </main>
