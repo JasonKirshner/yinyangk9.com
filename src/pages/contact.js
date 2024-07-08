@@ -1,10 +1,9 @@
 import HeroSmall from "@/components/HeroSmall/HeroSmall";
 import ContactForm from "@/components/ContactForm/ContactForm";
-import styles from "./page.module.css";
 
 export default function Contact() {
   return (
-    <main className={styles.main}>
+    <main>
       <HeroSmall 
         headerText="Contact Us"
         backgroundImage="/smart-dog.png"

@@ -6,7 +6,7 @@ import servicesData from '@/lib/data/services.json'
 
 export default function ServicePage() {
   return (
-    <main className={styles.main}>
+    <main>
       <HeroSmall 
         headerText="Services"
         backgroundImage="dogs-kissing.png"
