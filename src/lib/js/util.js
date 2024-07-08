@@ -2,6 +2,10 @@ export const oneDayInSeconds = () => {
   return 24 * 60 * 60
 }
 
+export const oneDayInMilliseconds = () => {
+  return 24 * 60 * 60 * 1000
+}
+
 export const thirtyDaysInMilliseconds = () => {
   return 24 * 60 * 60 * 30
 }
