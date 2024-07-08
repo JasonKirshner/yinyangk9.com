@@ -1,31 +1,20 @@
 import { getCookie, hasCookie } from 'cookies-next'
 
-import { oneDayInSeconds, responseErrorHandler, validation } from '../js/util'
+import {
+  oneDayInSeconds,
+  responseErrorHandler,
+  validation,
+  thirtyDaysInMilliseconds,
+  oneDayInMilliseconds
+} from '../js/util'
 import { IBD_REFRESH_TOKEN_URI } from '../js/constants'
-import instagramFeedTestData from "../data/instagramFeed.json"
-import { getAccessToken } from "./SupabaseClient"
+import { getAccessToken, updateAccessToken } from "./SupabaseClient"
 
 
-export default async function getInstagramFeed(req, res) {
+const getInstagramFeed = async (req, res) => {
   try {
-    let accessToken
-
-    if (hasCookie('accessTokenStore', { req, res })) {
-      const accessTokenStore = getCookie('accessTokenStore', { req, res })
-  
-      if (accessTokenStore.errorRes === null && accessTokenStore.token?.length > 0) {
-        if (needTokenRefresh(accessTokenStore.lastUpdate)) {
-          accessToken = await refreshToken(accessTokenStore.token)
-        } else {
-          accessToken = accessTokenStore.token
-        }
-      } else {
-        accessToken = await getAccessToken(req, res)
-      }
-    } else {
-      accessToken = await getAccessToken(req, res)
-    }
-
+    const accessToken = await retrieveAccessToken(req, res)
+    
     if (!validation(accessToken)) {
       return null
     }
@@ -36,7 +25,6 @@ export default async function getInstagramFeed(req, res) {
     responseErrorHandler(response, 'Instagram Basic Display Api')
     
     const instagramFeed = await response.json()
-    instagramFeed.data.push.apply(instagramFeed.data, instagramFeedTestData)
 
     return instagramFeed
   } catch (err) {
@@ -46,7 +34,7 @@ export default async function getInstagramFeed(req, res) {
   }
 }
 
-export async function refreshToken(accessToken) {
+const refreshToken = async (accessToken) => {
   const refreshTokenUrl = IBD_REFRESH_TOKEN_URI + accessToken
 
   try {
@@ -65,10 +53,10 @@ export async function refreshToken(accessToken) {
 }
 
 const needTokenRefresh = (lastUpdate) => {
-  const lastUpdateDate = new Date.parse(lastUpdate)
-  const currentDate = new Date.now()
+  const lastUpdateDate = Date.parse(lastUpdate)
+  const currentDate = Date.now()
 
-  const daysSinceLastUpdate = currentDate - lastUpdateDate
+  const daysSinceLastUpdate = (currentDate - lastUpdateDate) / oneDayInMilliseconds()
 
   if (daysSinceLastUpdate >= thirtyDaysInMilliseconds()) {
     return true
@@ -76,3 +64,26 @@ const needTokenRefresh = (lastUpdate) => {
 
   return false
 }
+
+const retrieveAccessToken = async (req, res) => {
+  if (hasCookie('accessTokenStore', { req, res })) {
+    const accessTokenStore = JSON.parse(getCookie('accessTokenStore', { req, res }))
+
+    if (accessTokenStore?.errorRes === null && accessTokenStore?.token?.length > 0) {
+      if (needTokenRefresh(accessTokenStore.lastUpdate)) {
+        const newAccessToken = await refreshToken(accessTokenStore.token)
+        updateAccessToken(req, res, newAccessToken)
+
+        return newAccessToken
+      } else {
+        return accessTokenStore.token
+      }
+    } else {
+      return await getAccessToken(req, res)
+    }
+  } else {
+    return await getAccessToken(req, res)
+  }
+}
+
+export default getInstagramFeed
