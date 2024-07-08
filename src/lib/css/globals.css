@@ -29,6 +29,18 @@ body {
   flex-direction: column;
 }
 
+#__next {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 70px);
+  margin-top: 70px;
+}
+
+.main {
+  height: 100%;
+}
+
 a {
   color: inherit;
   text-decoration: none;
