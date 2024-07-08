@@ -3,7 +3,7 @@ import styles from './Error404.module.css'
 const Error404 = () => {
   return (
     <div className={`container ${styles.container}`}>
-      <h1>Sorry This Page Doesn't Exist</h1>
+      <h1>Sorry This Page Doesn&apos;t Exist</h1>
     </div>
   )
 }
