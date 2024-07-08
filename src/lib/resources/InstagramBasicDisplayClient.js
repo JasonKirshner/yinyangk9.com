@@ -58,7 +58,7 @@ const needTokenRefresh = (lastUpdate) => {
 
   const daysSinceLastUpdate = (currentDate - lastUpdateDate) / oneDayInMilliseconds()
 
-  if (daysSinceLastUpdate >= thirtyDaysInMilliseconds()) {
+  if (daysSinceLastUpdate >= 30) {
     return true
   }
 

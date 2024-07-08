@@ -6,10 +6,6 @@ export const oneDayInMilliseconds = () => {
   return 24 * 60 * 60 * 1000
 }
 
-export const thirtyDaysInMilliseconds = () => {
-  return 24 * 60 * 60 * 30
-}
-
 export const oneDayInFuture = () => {
   const date = new Date()
   date.setDate(date.getDate() + 1)
