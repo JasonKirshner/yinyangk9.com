@@ -12,7 +12,7 @@ import { validation } from '@/lib/js/util'
 export async function getServerSideProps({ req, res }) {
   const instagramFeed = await getInstagramFeed(req, res)
 
-  return { props: { instagramFeed } }
+  return { props: { title: 'Yin Yang K9', instagramFeed } }
 }
 
 export default function Home({ instagramFeed }) {

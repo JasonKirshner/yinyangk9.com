@@ -4,6 +4,10 @@ import About from "@/components/About/About";
 
 import aboutUsContent from '@/lib/data/aboutUs.json'
 
+export function getStaticProps() {
+  return { props: { title: 'About Us' } }
+}
+
 export default function AboutUs() {
   return (
     <main>

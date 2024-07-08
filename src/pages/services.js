@@ -4,6 +4,10 @@ import FooterCTA from "@/components/FooterCTA/FooterCTA"
 
 import servicesData from '@/lib/data/services.json'
 
+export function getStaticProps() {
+  return { props: { title: 'Our Services' } }
+}
+
 export default function ServicePage() {
   return (
     <main>
