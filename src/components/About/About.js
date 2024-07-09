@@ -1,6 +1,6 @@
-// components/About.js
+import Image from 'next/image';
 
-import styles from './About.module.css'; // Adjust the path as necessary
+import styles from './About.module.css'
 
 const About = ({ title, paragraphs, image1, image2 }) => {
   return (
@@ -12,8 +12,8 @@ const About = ({ title, paragraphs, image1, image2 }) => {
         ))}
       </div>
       <div className={styles.images}>
-        <img className={styles.img} src={image1} alt="Image 1" />
-        <img className={styles.img} src={image2} alt="Image 2" />
+        <Image className={styles.img} src={image1} alt="Family Image" placeholder='blur' />
+        <Image className={styles.img} src={image2} alt="Petting Dog Image" placeholder='blur' />
       </div>
     </div>
   );
