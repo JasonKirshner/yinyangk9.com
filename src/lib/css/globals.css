@@ -47,6 +47,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  height: auto;
+}
+
 .container {
   max-width: 1250px;
   width: 100%;

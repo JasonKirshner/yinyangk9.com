@@ -67,7 +67,6 @@
   max-width: 500px;
   width: 100%;
   aspect-ratio: .95;
-  height: auto;
   
   @media(--lg) {
     margin-bottom: 30px;
