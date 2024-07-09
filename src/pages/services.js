@@ -4,6 +4,8 @@ import FooterCTA from "@/components/FooterCTA/FooterCTA"
 
 import servicesData from '@/lib/data/services.json'
 
+import dogsKissing from '../../public/dogs-kissing.png'
+
 export function getStaticProps() {
   return { props: { title: 'Our Services' } }
 }
@@ -13,7 +15,7 @@ export default function ServicePage() {
     <main>
       <HeroSmall 
         headerText="Services"
-        backgroundImage="dogs-kissing.png"
+        backgroundImage={dogsKissing}
       />
       <Services 
         // title="hi"
