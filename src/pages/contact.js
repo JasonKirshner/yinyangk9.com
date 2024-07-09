@@ -1,6 +1,8 @@
 import HeroSmall from "@/components/HeroSmall/HeroSmall";
 import ContactForm from "@/components/ContactForm/ContactForm";
 
+import smartDogImage from '../../public/smart-dog.gif'
+
 export function getStaticProps() {
   return { props: { title: 'Contact Us' } }
 }
@@ -10,7 +12,7 @@ export default function Contact() {
     <main>
       <HeroSmall 
         headerText="Contact Us"
-        backgroundImage="/smart-dog.gif"
+        backgroundImage={smartDogImage}
       />
       <ContactForm />
     </main>
