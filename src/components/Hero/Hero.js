@@ -1,12 +1,12 @@
-// components/Hero.js
-
+import Image from "next/image";
 import Link from "next/link";
+
 import styles from "./Hero.module.css";
 
-const Hero = ({ title, description, buttonText1, buttonText2, imageUrl, bgImage }) => {
+const Hero = ({ title, description, buttonText1, buttonText2, image, bgImage }) => {
   return (
     <div className={styles.hero}>
-      <img src={bgImage} alt="Hero Background Image" className={styles.bgImage} />
+      <Image src={bgImage} alt="Hero Background Image" className={styles.bgImage} />
       <div className={`${styles.heroContainer} container`}>
         <div className={styles.content}>
           <h1 className={`h1 ${styles.title}`}>{title}</h1>
@@ -16,7 +16,7 @@ const Hero = ({ title, description, buttonText1, buttonText2, imageUrl, bgImage 
             <Link className={`button button--alt ${styles.aboutUsBtn}`} href="/about">{buttonText2}</Link>
           </div>
         </div>
-        <img src={imageUrl} alt="Hero Image" className={styles.image} />
+        <Image src={image} alt="Hero Image" className={styles.image} />
       </div>
     </div>
   );
