@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={`${styles.navbarContainer} container`}>
         <Link className={styles.homeLink} href="/">
-          <Image src={logo} alt="Logo" className={styles.logo} />
+          <Image src={logo} alt="Logo" className={styles.logo} priority />
         </Link>
         <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '') }>
           <Link className={styles.navLink} href="/about">
