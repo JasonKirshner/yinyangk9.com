@@ -11,6 +11,11 @@
 
   @media(--md) {
     height: 600px;
+    padding: 10px 0;
+  }
+
+  @media(--sm) {
+    height: auto;
   }
 }
 
@@ -46,7 +51,7 @@
 }
 
 .description {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .buttons {

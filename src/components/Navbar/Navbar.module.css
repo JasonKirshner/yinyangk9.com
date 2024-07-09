@@ -7,6 +7,10 @@
   top: 0;
   z-index: 999;
   background-color: var(--white);
+
+  @media(--sm) {
+    height: 60px;
+  }
 }
 
 .navbarContainer {
@@ -20,7 +24,7 @@
   position: absolute;
   z-index: 2;
   left: 20px;
-  top: 10px;
+  transform: translateY(35%);
 }
 
 .navbarLinks {
@@ -63,6 +67,10 @@
 
 .logo {
   width: 80px;
+
+  @media(--sm) {
+    width: 70px;
+  }
 }
 
 .navbarOpen {
