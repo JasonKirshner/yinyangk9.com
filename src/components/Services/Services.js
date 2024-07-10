@@ -1,6 +1,6 @@
-import styles from './Services.module.css';
+import styles from './Services.module.css'
 
-import Service from '@/components/Service/Service';
+import Service from '@/components/Service/Service'
 
 const Services = ({ title, services }) => {
   const renderServices = () => services.map((service, i) => (
@@ -21,7 +21,7 @@ const Services = ({ title, services }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Services;
+export default Services

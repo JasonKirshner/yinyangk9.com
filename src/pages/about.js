@@ -1,6 +1,6 @@
-import HeroSmall from "@/components/HeroSmall/HeroSmall";
-import FooterCTA from "@/components/FooterCTA/FooterCTA";
-import About from "@/components/About/About";
+import HeroSmall from "@/components/HeroSmall/HeroSmall"
+import FooterCTA from "@/components/FooterCTA/FooterCTA"
+import About from "@/components/About/About"
 
 import aboutUsContent from '@/lib/data/aboutUs.json'
 
@@ -26,5 +26,5 @@ export default function AboutUs() {
       />
       <FooterCTA />
     </main>
-  );
+  )
 }

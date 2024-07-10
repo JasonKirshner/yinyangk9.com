@@ -1,8 +1,8 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 import mouthpieceImage from '../../../public/mouthpiece.png'
 
-import styles from './Testimonial.module.css';
+import styles from './Testimonial.module.css'
 
 const Testimonial = ({ name, text, image }) => {
   return (
@@ -12,7 +12,7 @@ const Testimonial = ({ name, text, image }) => {
       <p className={styles.name}>{name}</p>
       <Image src={mouthpieceImage} className={styles.mouthpiece} alt={'Chat bubble mouthpiece image'} placeholder='blur' />
     </div>
-  );
-};
+  )
+}
 
-export default Testimonial;
+export default Testimonial

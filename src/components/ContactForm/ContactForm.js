@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { useState } from 'react';
-import { Input, Textarea } from "@nextui-org/react";
-import styles from './ContactForm.module.css'; // Adjust the path as necessary
+import { useState } from 'react'
+import { Input, Textarea } from "@nextui-org/react"
+import styles from './ContactForm.module.css' // Adjust the path as necessary
 
 const ContactUsForm = () => {
-  const [dogName, setDogName] = useState("");
-  const [message, setMessage] = useState("");
+  const [dogName, setDogName] = useState("")
+  const [message, setMessage] = useState("")
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Handle form submission
-  };
+  }
 
   return (
       <div className={`container ${styles.contactContainer}`}>
@@ -70,7 +70,7 @@ const ContactUsForm = () => {
             </button>
         </form>
     </div>
-  );
-};
+  )
+}
 
-export default ContactUsForm;
+export default ContactUsForm

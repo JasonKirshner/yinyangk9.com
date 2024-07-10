@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 import styles from './About.module.css'
 
@@ -16,7 +16,7 @@ const About = ({ title, paragraphs, image1, image2 }) => {
         <Image className={styles.img} src={image2} alt="Petting Dog Image" placeholder='blur' />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

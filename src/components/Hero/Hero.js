@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
-import styles from "./Hero.module.css";
+import styles from "./Hero.module.css"
 
 const Hero = ({ title, description, buttonText1, buttonText2, image, bgImage }) => {
   return (
@@ -19,7 +19,7 @@ const Hero = ({ title, description, buttonText1, buttonText2, image, bgImage }) 
         <Image src={image} alt="Hero Image" className={styles.image} priority />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

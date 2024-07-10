@@ -9,7 +9,7 @@ const Service = ({ title, description, id }) => {
         Learn More
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Service;
+export default Service

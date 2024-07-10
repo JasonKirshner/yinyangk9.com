@@ -1,8 +1,8 @@
-import Head from "next/head";
+import Head from "next/head"
 
-import "@/lib/css/globals.css";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
+import "@/lib/css/globals.css"
+import Navbar from "@/components/Navbar/Navbar"
+import Footer from "@/components/Footer/Footer"
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -31,5 +31,5 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Footer />
     </>
-  );
+  )
 }

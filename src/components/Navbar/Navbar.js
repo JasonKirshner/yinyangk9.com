@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Spin as Hamburger } from 'hamburger-react'
 
-import styles from './Navbar.module.css';
+import styles from './Navbar.module.css'
 
 import logo from '../../../public/logo.png'
 
@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
 export default Navbar

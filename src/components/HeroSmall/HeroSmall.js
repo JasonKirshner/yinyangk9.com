@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
-import styles from './HeroSmall.module.css';
+import styles from './HeroSmall.module.css'
 
 const HeroSmall = ({ headerText, backgroundImage }) => {
   return (
@@ -10,7 +10,7 @@ const HeroSmall = ({ headerText, backgroundImage }) => {
         <h1 className={`${styles.headerText} h1`}>{headerText}</h1>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HeroSmall;
+export default HeroSmall

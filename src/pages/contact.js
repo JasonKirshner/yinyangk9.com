@@ -1,5 +1,5 @@
-import HeroSmall from "@/components/HeroSmall/HeroSmall";
-import ContactForm from "@/components/ContactForm/ContactForm";
+import HeroSmall from "@/components/HeroSmall/HeroSmall"
+import ContactForm from "@/components/ContactForm/ContactForm"
 
 import smartDogImage from '../../public/smart-dog.gif'
 
@@ -16,5 +16,5 @@ export default function Contact() {
       />
       <ContactForm />
     </main>
-  );
+  )
 }

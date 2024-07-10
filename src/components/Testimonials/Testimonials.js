@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './Testimonials.module.css';
-import Testimonial from '../Testimonial/Testimonial';
+import React from 'react'
+import styles from './Testimonials.module.css'
+import Testimonial from '../Testimonial/Testimonial'
 
 const Testimonials = ({ title, testimonials }) => {
   
@@ -23,7 +23,7 @@ const Testimonials = ({ title, testimonials }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Testimonials;
+export default Testimonials

@@ -1,4 +1,4 @@
-import Error404 from "@/components/Error404/Error404";
+import Error404 from "@/components/Error404/Error404"
 
 export function getStaticProps() {
   return { props: { title: "404 Not Found" } }
@@ -9,5 +9,5 @@ export default function errorPage() {
     <main className='main'>
       <Error404 />
     </main>
-  );
+  )
 }
