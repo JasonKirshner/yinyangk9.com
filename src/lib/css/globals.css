@@ -51,6 +51,10 @@ img {
   height: auto;
 }
 
+video {
+  pointer-events: none;
+}
+
 .container {
   max-width: 1250px;
   width: 100%;

@@ -1,18 +1,60 @@
-import Link from "next/link";
+import Link from "next/link"
+import Image from "next/image"
+import { InView } from "react-intersection-observer"
 
 import styles from "./InstagramFeed.module.css"
 
 const InstagramFeed = ({ instagramFeed }) => {
+  const renderPosts = instagramFeed.data.slice(0, 8).map((post, i) => {
+    const postMediaType = post.media_url.match(/https?.*?\.mp4/) ? 'VIDEO' : 'IMAGE'
+    const postCaption = post.caption
+    const postPermaLink = post.permalink
+    let postMediaUrl = post.media_url
+
+    if (postMediaType === 'IMAGE') {
+      
+      return (
+        <InView key={i} triggerOnce>
+          {({ inView, ref }) => (
+            <Link href={postPermaLink} className={styles.post}>
+              <Image
+                ref={ref}
+                src={postMediaUrl}
+                className={styles.media}
+                alt={`Instagram Post Caption: ${postCaption}`}
+                width={0}
+                height={0}
+                sizes='100vw'
+                style={{
+                  opacity: inView ? 1 : 0
+                }}
+              />
+            </Link>
+          )}
+        </InView>
+      )
+    }
+
+    return (
+      <InView key={i} triggerOnce>
+        {({ inView, ref }) => (
+          <Link href={postPermaLink} className={styles.post}>
+            <video ref={ref} autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media} style={{opacity: inView ? 1 : 0}}>
+              <source src={postMediaUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </Link>
+        )}
+      </InView>
+    )
+  })
+
   return (
     <div className={styles.instagramFeed}>
       <div className={`container ${styles.feedContainer}`}>
-        <Link href="http://instagram.com" className={`h3 ${styles.title}`}>@yinyangk9</Link>
+        <Link href="https://www.instagram.com/yinyangk9/" className={`h3 ${styles.title}`}>@yinyangk9</Link>
         <div className={styles.feed}>
-          {instagramFeed.data.map((post, i) => (
-            <div key={i} className={styles.post}>
-              <img src={post.media_url} className={styles.media} alt={`Instagram Post Caption: ${post.caption}`} />
-            </div>
-          ))}
+          {renderPosts}
         </div>
       </div>
     </div>
