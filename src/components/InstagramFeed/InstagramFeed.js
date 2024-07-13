@@ -1,7 +1,8 @@
 import Link from "next/link"
 import Image from "next/image"
-import { InView } from "react-intersection-observer"
 
+import InViewLoad from '../InViewLoad/InViewLoad'
+  
 import styles from "./InstagramFeed.module.css"
 
 const InstagramFeed = ({ instagramFeed }) => {
@@ -12,40 +13,32 @@ const InstagramFeed = ({ instagramFeed }) => {
     let postMediaUrl = post.media_url
 
     if (postMediaType === 'IMAGE') {
-      
       return (
-        <InView key={i} triggerOnce>
-          {({ inView, ref }) => (
-            <Link href={postPermaLink} className={styles.post}>
-              <Image
-                ref={ref}
-                src={postMediaUrl}
-                className={styles.media}
-                alt={`Instagram Post Caption: ${postCaption}`}
-                width={0}
-                height={0}
-                sizes='100vw'
-                style={{
-                  opacity: inView ? 1 : 0
-                }}
-              />
-            </Link>
-          )}
-        </InView>
+        <InViewLoad key={i}>
+          <Link href={postPermaLink} className={styles.post}>
+            <Image
+              src={postMediaUrl}
+              className={styles.media}
+              alt={`Instagram Post Caption: ${postCaption}`}
+              width={0}
+              height={0}
+              sizes='100vw'
+              priority
+            />
+          </Link>
+        </InViewLoad>
       )
     }
 
     return (
-      <InView key={i} triggerOnce>
-        {({ inView, ref }) => (
-          <Link href={postPermaLink} className={styles.post}>
-            <video ref={ref} autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media} style={{opacity: inView ? 1 : 0}}>
-              <source src={postMediaUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </Link>
-        )}
-      </InView>
+      <InViewLoad key={i}>
+        <Link href={postPermaLink} className={styles.post}>
+          <video autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
+            <source src={postMediaUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </Link>
+      </InViewLoad>
     )
   })
 
