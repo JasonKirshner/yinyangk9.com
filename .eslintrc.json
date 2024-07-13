@@ -1,9 +1,3 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": [
-    "@stylistic/js"
-  ],
-  "rules": {
-    "@stylistic/js/semi": ["error", "never"]
-  }
+  "extends": ["next/core-web-vitals", "standard", "next"]
 }
