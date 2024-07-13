@@ -1,3 +1,4 @@
 {
-  "extends": ["next/core-web-vitals", "standard", "next"]
+  "parser": "@babel/eslint-parser",
+  "extends": ["standard", "standard-jsx", "standard-react", "next/core-web-vitals", "next"]
 }
