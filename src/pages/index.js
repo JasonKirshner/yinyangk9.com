@@ -32,7 +32,12 @@ const testimonials = [
 
 export async function getServerSideProps({ req, res }) {
   const instagramFeed = await getInstagramFeed(req, res)
-
+  
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=59, stale-while-revalidate=100'
+  )
+  
   return { props: { title: 'Yin Yang K9', instagramFeed } }
 }
 
