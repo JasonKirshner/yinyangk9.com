@@ -1,10 +1,10 @@
-import FooterCTA from "@/components/FooterCTA/FooterCTA"
-import Hero from "@/components/Hero/Hero"
-import Services from "@/components/Services/Services"
-import Testimonials from "@/components/Testimonials/Testimonials"
-import InstagramFeed from "@/components/InstagramFeed/InstagramFeed"
+import FooterCTA from '@/components/FooterCTA/FooterCTA'
+import Hero from '@/components/Hero/Hero'
+import Services from '@/components/Services/Services'
+import Testimonials from '@/components/Testimonials/Testimonials'
+import InstagramFeed from '@/components/InstagramFeed/InstagramFeed'
 
-import getInstagramFeed from "@/lib/resources/InstagramBasicDisplayClient"
+import getInstagramFeed from '@/lib/resources/InstagramBasicDisplayClient'
 import services from '@/lib/data/services.json'
 import { validation } from '@/lib/js/util'
 
@@ -15,24 +15,24 @@ import avatarImage from '../../public/avatar.png'
 const testimonials = [
   {
     image: avatarImage,
-    testimony: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    name: "John Doe"
+    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    name: 'John Doe'
   },
   {
     image: avatarImage,
-    testimony: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    name: "John Doe"
+    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    name: 'John Doe'
   },
   {
     image: avatarImage,
-    testimony: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-    name: "John Doe"
+    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+    name: 'John Doe'
   }
 ]
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps ({ req, res }) {
   const instagramFeed = await getInstagramFeed(req, res)
-  
+
   res.setHeader(
     'Cache-Control',
     'public, s-maxage=1800, stale-while-revalidate=86400'
@@ -41,7 +41,7 @@ export async function getServerSideProps({ req, res }) {
   return { props: { title: 'Yin Yang K9', instagramFeed } }
 }
 
-export default function Home({ instagramFeed }) {
+export default function Home ({ instagramFeed }) {
   return (
     <main>
       <Hero
