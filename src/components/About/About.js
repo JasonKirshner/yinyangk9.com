@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
 import styles from './About.module.css'
+import InViewLoad from '../InViewLoad/InViewLoad'
 
 const About = ({ title, paragraphs, image1, image2 }) => {
   return (
@@ -8,12 +9,16 @@ const About = ({ title, paragraphs, image1, image2 }) => {
       <div className={styles.text}>
         <h2>{title}</h2>
         {paragraphs.map((para, index) => (
-        <p key={index}>{para}</p>
+          <p key={index}>{para}</p>
         ))}
       </div>
       <div className={styles.images}>
-        <Image className={styles.img} src={image1} alt="Family Image" placeholder='blur' />
-        <Image className={styles.img} src={image2} alt="Petting Dog Image" placeholder='blur' />
+        <InViewLoad>
+          <Image className={styles.img} src={image1} alt='Family Image' />
+        </InViewLoad>
+        <InViewLoad>
+          <Image className={styles.img} src={image2} alt='Petting Dog Image' />
+        </InViewLoad>
       </div>
     </div>
   )
