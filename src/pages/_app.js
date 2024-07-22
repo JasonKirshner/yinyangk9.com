@@ -1,31 +1,34 @@
-import Head from "next/head"
+import Head from 'next/head'
 
-import "@/lib/css/globals.css"
-import Navbar from "@/components/Navbar/Navbar"
-import Footer from "@/components/Footer/Footer"
+import '@/lib/css/globals.css'
+import Navbar from '@/components/Navbar/Navbar'
+import Footer from '@/components/Footer/Footer'
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp ({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>{ pageProps.title }</title>
+        <title>{pageProps.title}</title>
         <meta
-          name="description"
-          content="Yin Yang K9 is based in San Diego, 
+          name='description'
+          content='Yin Yang K9 is based in San Diego,
           California and offers a variety of private in home dog training, day
-          training and group classes in and around San Diego." />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          training and group classes in and around San Diego.'
+        />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <meta
-          property="og:image"
-          content="./logo.png" />
+          property='og:image'
+          content='./logo.png'
+        />
         <meta
-          property="og:description"
-          content="Yin Yang K9 is based in San Diego, 
+          property='og:description'
+          content='Yin Yang K9 is based in San Diego,
           California and offers a variety of private in home dog training, day
-          training and group classes in and around San Diego." />
-        <meta property="og:title" content={ pageProps.title } />
-        <link rel="icon" type="image/x-icon" href="./logo.png" />
+          training and group classes in and around San Diego.'
+        />
+        <meta property='og:title' content={pageProps.title} />
+        <link rel='icon' type='image/x-icon' href='./logo.png' />
       </Head>
       <Navbar />
       <Component {...pageProps} />

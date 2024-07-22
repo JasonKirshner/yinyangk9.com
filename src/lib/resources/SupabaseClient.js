@@ -9,16 +9,16 @@ const initSupabaseClient = (req, res) => {
     process.env.SUPABASE_ANON_KEY,
     {
       cookies: {
-        getAll() {
+        getAll () {
           return Object.keys(req.cookies)
-          .map((name) => ({ name, value: req.cookies[name] }))
+            .map((name) => ({ name, value: req.cookies[name] }))
         },
-        setAll(cookiesToSet) {
+        setAll (cookiesToSet) {
           res.setHeader('Set-Cookie',
             cookiesToSet.map(({ name, value, options }) =>
               serializeCookieHeader(name, value, options)))
         }
-      },
+      }
     }
   )
 }
@@ -28,17 +28,17 @@ export const getAccessToken = async (req, res) => {
 
   try {
     const supabaseClient = initSupabaseClient(req, res)
-    
+
     const response = await supabaseClient
       .from('ApiToken')
       .select('access_token, updated_at')
       .eq('id', 1)
-    
+
     responseErrorHandler(response, 'Supabase Api (getAccessToken)')
 
     const accessToken = response.data[0].access_token
     const lastUpdate = response.data[0].updated_at
-    accessTokenObj = { token: accessToken, lastUpdate: lastUpdate, errorRes: null }
+    accessTokenObj = { token: accessToken, lastUpdate, errorRes: null }
     setCookie('accessTokenStore', accessTokenObj, {
       req,
       res,
@@ -73,11 +73,11 @@ export const updateAccessToken = async (req, res, newAccessToken) => {
       .update({ access_token: newAccessToken })
       .eq('id', 1)
       .select('updated_at')
-    
+
     responseErrorHandler(response, 'Supabase Api (updateAccessToken)')
 
     const lastUpdate = response.data[0].updated_at
-    accessTokenObj = { token: newAccessToken, lastUpdate: lastUpdate, errorRes: null }
+    accessTokenObj = { token: newAccessToken, lastUpdate, errorRes: null }
     setCookie('accessTokenStore', accessTokenObj, {
       req,
       res,
