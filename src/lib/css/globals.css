@@ -33,7 +33,7 @@ body {
   width: 100%;
   margin-top: 70px;
 
-  @media(--sm) {
+  @media(--xs) {
     margin-top: 60px;
   }
 }

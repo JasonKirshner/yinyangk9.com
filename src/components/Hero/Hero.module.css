@@ -14,7 +14,7 @@
     padding: 10px 0;
   }
 
-  @media(--sm) {
+  @media(--xs) {
     height: auto;
   }
 }
@@ -77,7 +77,7 @@
     max-width: 260px;
   }
 
-  @media(--sm) {
+  @media(--xs) {
     max-width: 200px;
   }
 }
