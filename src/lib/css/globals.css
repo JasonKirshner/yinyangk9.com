@@ -135,12 +135,12 @@ video {
 }
 
 .h4, h4 {
-  font-size: 24px;
+  font-size: 21px;
   font-family: var(--montserrat);
   font-weight: bold;
 
   @media(--lg) {
-    font-size: 21px;
+    font-size: 18px;
   }
 }
 
