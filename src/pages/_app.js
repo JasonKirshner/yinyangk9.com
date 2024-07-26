@@ -35,6 +35,7 @@ export default function MyApp ({ Component, pageProps }) {
         <link rel='manifest' href='/favicons/site.webmanifest' />
         <link rel='mask-icon' href='/favicons/safari-pinned-tab.svg' color='#5bbad5' />
         <meta name='msapplication-TileColor' content='#da532c' />
+        <meta name='msapplication-TileImage' content='/favicons/mstile-150x150.png' />
         <meta name='theme-color' content='#ffffff' />
       </Head>
       <NextNProgress color='#D52129' height={4} options={{ showSpinner: false }} />
