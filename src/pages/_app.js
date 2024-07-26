@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import NextNProgress from 'nextjs-progressbar'
 
 import '@/lib/css/globals.css'
 import Navbar from '@/components/Navbar/Navbar'
@@ -30,6 +31,7 @@ export default function MyApp ({ Component, pageProps }) {
         <meta property='og:title' content={pageProps.title} />
         <link rel='icon' type='image/x-icon' href='./logo.png' />
       </Head>
+      <NextNProgress color='#D52129' height={4} options={{ showSpinner: false }} />
       <Navbar />
       <Component {...pageProps} />
       <Footer />
