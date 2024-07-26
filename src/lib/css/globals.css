@@ -72,6 +72,11 @@ video {
   color: var(--red);
   transition: color 100ms ease-in-out, background-color 200ms ease-in-out;
   cursor: pointer;
+  font-size: 18px;
+
+  @media(--sm) {
+    font-size: 15px;
+  }
 
   &--alt {
     background-color: var(--red);
