@@ -1,52 +1,52 @@
-import nodemailer from "nodemailer";
-import { google } from "googleapis";
+import nodemailer from 'nodemailer'
+import { google } from 'googleapis'
 
-const OAuth2 = google.auth.OAuth2;
+const OAuth2 = google.auth.OAuth2
 
-export default function handler(req, res) {
+export default function handler (req, res) {
   // Process a POST request
   const createTransporter = async () => {
     const oauth2Client = new OAuth2(
       process.env.CLIENT_ID,
       process.env.CLIENT_SECRET,
-      "https://developers.google.com/oauthplayground"
-    );
+      'https://developers.google.com/oauthplayground'
+    )
 
     oauth2Client.setCredentials({
-      refresh_token: process.env.REFRESH_TOKEN,
-    });
+      refresh_token: process.env.REFRESH_TOKEN
+    })
 
     const accessToken = await new Promise((resolve, reject) => {
       oauth2Client.getAccessToken((err, token) => {
         if (err) {
-          reject("Failed to create access token :(");
+          reject(new Error('Failed to create access token with message: ' + err))
         }
-        resolve(token);
-      });
-    });
+        resolve(token)
+      })
+    })
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
-        type: "OAuth2",
+        type: 'OAuth2',
         user: process.env.EMAIL,
         accessToken,
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
-      },
-    });
+        refreshToken: process.env.REFRESH_TOKEN
+      }
+    })
 
-    return transporter;
-  };
+    return transporter
+  }
 
-  //emailOptions - who sends what to whom
+  // emailOptions - who sends what to whom
   const sendEmail = async (emailOptions) => {
-    let emailTransporter = await createTransporter();
-    await emailTransporter.sendMail(emailOptions);
-  };
+    const emailTransporter = await createTransporter()
+    await emailTransporter.sendMail(emailOptions)
+  }
 
-  const { name, dogsName, phone, email, message } = req.body;
+  const { name, dogsName, phone, email, message } = req.body
 
   sendEmail({
     subject: `New inquiry from ${name}`,
@@ -57,6 +57,6 @@ export default function handler(req, res) {
           Email: ${email}
           Message: ${message}`,
     to: process.env.EMAIL,
-    from: process.env.EMAIL,
-  });
+    from: process.env.EMAIL
+  })
 }
