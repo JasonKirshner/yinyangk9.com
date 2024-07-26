@@ -13,6 +13,7 @@ export default function Contact () {
       <HeroSmall
         headerText='Contact Us'
         backgroundImage={smartDogImage}
+        unoptimized
       />
       <ContactForm />
     </main>
