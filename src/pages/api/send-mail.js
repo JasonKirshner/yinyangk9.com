@@ -46,15 +46,16 @@ export default function handler (req, res) {
     await emailTransporter.sendMail(emailOptions)
   }
 
-  const { name, dogsName, phone, email, message } = req.body
+  const { ownersName, dogsName, phone, email, message, service } = req.body
 
   sendEmail({
-    subject: `New inquiry from ${name}`,
+    subject: `New inquiry from ${ownersName}`,
     text: `You have received a new inquiry.
-          Name: ${name}
+          Owner's Name: ${ownersName}
           Dog's name: ${dogsName}
           Phone: ${phone}
           Email: ${email}
+          Service: ${service}
           Message: ${message}`,
     to: process.env.EMAIL,
     from: process.env.EMAIL
