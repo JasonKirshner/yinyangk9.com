@@ -1,9 +1,10 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import InViewLoad from '../InViewLoad/InViewLoad'
 import styles from './ServiceDetail.module.css'
 
-const ServiceDetail = ({ image, name, description, pricing }) => {
+const ServiceDetail = ({ image, name, code, description, pricing }) => {
   return (
     <div className={styles.service}>
       <InViewLoad>
@@ -15,6 +16,7 @@ const ServiceDetail = ({ image, name, description, pricing }) => {
       <ul className={styles.pricing}>
         {pricing.map((price, i) => <li key={i} className={styles.price}>{price}</li>)}
       </ul>
+      <Link className={`button ${styles.button}`} href={`/contact?service=${code}`}>Contact Us</Link>
     </div>
   )
 }

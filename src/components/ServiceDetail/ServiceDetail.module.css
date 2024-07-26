@@ -1,3 +1,9 @@
+.service {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .title {
   margin: 15px 0;
 }
@@ -9,5 +15,9 @@
 }
 
 .pricing {
-  margin: 20px 0 0 30px;
+  margin-left: 30px;
+}
+
+.button {
+  margin-top: 20px;
 }
