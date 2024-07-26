@@ -4,102 +4,102 @@ import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Input, Textarea } from '@nextui-org/react'
 
+import { responseErrorHandler } from '@/lib/js/util'
+
 import styles from './ContactForm.module.css'
 
 const ContactUsForm = () => {
   const searchParams = useSearchParams()
   const queryParamService = searchParams.get('service')
 
+  const [ownersName, setOwnersName] = useState('')
   const [dogName, setDogName] = useState('')
   const [message, setMessage] = useState('')
-  const [serviceValue, setServiceValue] = useState(queryParamService || '')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [service, setService] = useState(queryParamService || '')
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission
-      const name = document.getElementById("name").value;
-      const dogsName = document.getElementById("dogsName").value;
-      const phone = document.getElementById("phone").value;
-      const email = document.getElementById("email").value;
-      const message = document.getElementById("message").value;
+  const handleSubmit = async (e) => {
+    e.preventDefault()
 
-      fetch("/api/send-mail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, dogsName, phone, email, message }),
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          alert(data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-  };
+    const sendMessageResponse = await fetch('/api/send-mail', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ ownersName, dogName, phone, email, message, service })
+    })
+
+    responseErrorHandler(sendMessageResponse)
+  }
 
   const handleChange = (event) => {
-    setServiceValue(event.target.value)
+    setService(event.target.value)
   }
 
   return (
-    <div id="contactForm" className={`container ${styles.contactContainer}`}>
-      <h3 className="h3">Lets hear about you pup!</h3>
+    <div id='contactForm' className={`container ${styles.contactContainer}`}>
+      <h3 className='h3'>Lets hear about you pup!</h3>
       <form onSubmit={handleSubmit} className={styles.form}>
         <Input
           required
-          id="name"
-          type="text"
-          label="Name"
+          id='ownersName'
+          type='text'
+          value={ownersName}
+          onChange={(e) => setOwnersName(e.target.value)}
+          label="Owner's Name"
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, "input-label"],
-            input: styles.input,
+            label: [styles.label, 'input-label'],
+            input: styles.input
           }}
           fullWidth
         />
         <Input
           required
-          id="dogsName"
-          type="text"
+          id='dogsName'
+          type='text'
           label="Dog's Name"
           value={dogName}
           onChange={(e) => setDogName(e.target.value)}
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, "input-label"],
-            input: styles.input,
+            label: [styles.label, 'input-label'],
+            input: styles.input
           }}
           fullWidth
         />
         <Input
           required
-          id="phone"
-          type="tel"
-          label="Phone Number"
+          id='phone'
+          type='tel'
+          label='Phone Number'
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, "input-label"],
-            input: styles.input,
+            label: [styles.label, 'input-label'],
+            input: styles.input
           }}
           fullWidth
         />
         <Input
           required
-          id="email"
-          type="email"
-          label="Email"
+          id='email'
+          type='email'
+          label='Email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, "input-label"],
-            input: styles.input,
+            label: [styles.label, 'input-label'],
+            input: styles.input
           }}
           fullWidth
         />
         <div className={styles.serviceDropDownWrapper}>
           <label className={`input-label ${styles.label}`} for='service-dropdown'>Service</label>
-          <select id='service-dropdown' className={styles.serviceDropDown} value={serviceValue} onChange={handleChange}>
+          <select id='service-dropdown' className={styles.serviceDropDown} value={service} onChange={handleChange}>
             <option value='board-n-train'>Board & Train</option>
             <option value='boarding'>Boarding</option>
             <option value='train-n-play'>Train & Play</option>
@@ -111,20 +111,20 @@ const ContactUsForm = () => {
         </div>
         <Textarea
           require
-          id="message"
+          id='message'
           minRows={5}
-          label="How Can We Help?"
+          label='How Can We Help?'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, "input-label"],
-            input: styles.textarea,
+            label: [styles.label, 'input-label'],
+            input: styles.textarea
           }}
           fullWidth
         />
         <button
-          type="submit"
+          type='submit'
           className={`button ${styles.sendBtn}`}
           onClick={handleSubmit}
         >
