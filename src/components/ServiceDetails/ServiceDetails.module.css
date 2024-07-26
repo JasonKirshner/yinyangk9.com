@@ -1,0 +1,15 @@
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 100px;
+  margin-top: 100px;
+
+  @media(--lg) {
+    margin-top: 50px;
+    gap: 50px;
+  }
+
+  @media(--sm) {
+    grid-template-columns: 1fr;
+  }
+}
