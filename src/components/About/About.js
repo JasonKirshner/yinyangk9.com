@@ -1,6 +1,7 @@
-// components/About.js
+import Image from 'next/image'
 
-import styles from './About.module.css'; // Adjust the path as necessary
+import styles from './About.module.css'
+import InViewLoad from '../InViewLoad/InViewLoad'
 
 const About = ({ title, paragraphs, image1, image2 }) => {
   return (
@@ -8,15 +9,19 @@ const About = ({ title, paragraphs, image1, image2 }) => {
       <div className={styles.text}>
         <h2>{title}</h2>
         {paragraphs.map((para, index) => (
-        <p key={index}>{para}</p>
+          <p key={index}>{para}</p>
         ))}
       </div>
       <div className={styles.images}>
-        <img className={styles.img} src={image1} alt="Image 1" />
-        <img className={styles.img} src={image2} alt="Image 2" />
+        <InViewLoad>
+          <Image className={styles.img} src={image1} alt='Family Image' />
+        </InViewLoad>
+        <InViewLoad>
+          <Image className={styles.img} src={image2} alt='Petting Dog Image' />
+        </InViewLoad>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

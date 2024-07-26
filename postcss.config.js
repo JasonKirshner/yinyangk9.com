@@ -4,21 +4,21 @@ module.exports = {
     [
       '@csstools/postcss-global-data',
       {
-        files: ['src/lib/css/breakpoints.css'],
-      },
+        files: ['src/lib/css/breakpoints.css']
+      }
     ],
     'postcss-nested',
     [
       'postcss-preset-env',
       {
         autoprefixer: {
-          flexbox: 'no-2009',
+          flexbox: 'no-2009'
         },
         stage: 3,
         features: {
-          'custom-media-queries': true,
+          'custom-media-queries': true
         }
-      },
-    ],
+      }
+    ]
   ]
 }

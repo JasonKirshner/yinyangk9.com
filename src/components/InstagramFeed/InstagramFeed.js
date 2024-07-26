@@ -1,18 +1,52 @@
-import Link from "next/link";
+import Link from 'next/link'
+import Image from 'next/image'
 
-import styles from "./InstagramFeed.module.css"
+import InViewLoad from '../InViewLoad/InViewLoad'
+
+import styles from './InstagramFeed.module.css'
 
 const InstagramFeed = ({ instagramFeed }) => {
+  const renderPosts = instagramFeed.data.slice(0, 8).map((post, i) => {
+    const postMediaType = post.media_url.match(/https?.*?\.mp4/) ? 'VIDEO' : 'IMAGE'
+    const postCaption = post.caption
+    const postPermaLink = post.permalink
+    const postMediaUrl = post.media_url
+
+    if (postMediaType === 'IMAGE') {
+      return (
+        <InViewLoad key={i}>
+          <Link href={postPermaLink} className={styles.post}>
+            <Image
+              src={postMediaUrl}
+              className={styles.media}
+              alt={`Instagram Post Caption: ${postCaption}`}
+              width={0}
+              height={0}
+              sizes='100vw'
+            />
+          </Link>
+        </InViewLoad>
+      )
+    }
+
+    return (
+      <InViewLoad key={i}>
+        <Link href={postPermaLink} className={styles.post}>
+          <video autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
+            <source src={postMediaUrl} type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
+        </Link>
+      </InViewLoad>
+    )
+  })
+
   return (
     <div className={styles.instagramFeed}>
       <div className={`container ${styles.feedContainer}`}>
-        <Link href="http://instagram.com" className={`h3 ${styles.title}`}>@yinyangk9</Link>
+        <Link href='https://www.instagram.com/yinyangk9/' className={`h3 ${styles.title}`}>@yinyangk9</Link>
         <div className={styles.feed}>
-          {instagramFeed.data.map((post, i) => (
-            <div key={i} className={styles.post}>
-              <img src={post.media_url} className={styles.media} alt={`Instagram Post Caption: ${post.caption}`} />
-            </div>
-          ))}
+          {renderPosts}
         </div>
       </div>
     </div>

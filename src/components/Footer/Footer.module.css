@@ -70,7 +70,7 @@
 .contactLink {
   display: flex;
 
-  &:nth-child(2) {
+  &:not(:first-child) {
     margin-top: 15px;
   }
 }

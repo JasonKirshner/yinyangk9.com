@@ -1,10 +1,9 @@
-import React from 'react';
-import styles from './Testimonials.module.css';
-import Testimonial from '../Testimonial/Testimonial';
+import React from 'react'
+import styles from './Testimonials.module.css'
+import Testimonial from '../Testimonial/Testimonial'
 
 const Testimonials = ({ title, testimonials }) => {
-  
-  const renderTestimonials = () =>  
+  const renderTestimonials = () =>
     testimonials.map((testimonial, i) => (
       <Testimonial
         key={i}
@@ -17,13 +16,13 @@ const Testimonials = ({ title, testimonials }) => {
   return (
     <div className={styles.testimonialsWrapper}>
       <div className={`container ${styles.testimonialsContainer}`}>
-        <h3 className={styles.title}>{ title }</h3>
+        <h3 className={styles.title}>{title}</h3>
         <div className={styles.testimonials}>
           {renderTestimonials()}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Testimonials;
+export default Testimonials

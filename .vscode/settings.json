@@ -5,5 +5,11 @@
   },
   "emmet.includeLanguages": {
     "postcss": "css"
-  }
+  },
+  "eslint.validate": [
+    "javascriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+  },
 }

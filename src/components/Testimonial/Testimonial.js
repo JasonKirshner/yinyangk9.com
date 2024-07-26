@@ -1,14 +1,21 @@
-import styles from './Testimonial.module.css';
+import Image from 'next/image'
+
+import mouthpieceImage from '../../../public/mouthpiece.png'
+
+import styles from './Testimonial.module.css'
+import InViewLoad from '../InViewLoad/InViewLoad'
 
 const Testimonial = ({ name, text, image }) => {
   return (
     <div className={styles.testimonial}>
-      <img src={image} className={styles.avatar} />
+      <InViewLoad>
+        <Image src={image} className={styles.avatar} alt={`Image of ${name}`} />
+      </InViewLoad>
       <p className={styles.text}>{text}</p>
       <p className={styles.name}>{name}</p>
-      <img src="./mouthpiece.png" className={styles.mouthpiece} />
+      <Image src={mouthpieceImage} className={styles.mouthpiece} alt='Chat bubble mouthpiece image' priority />
     </div>
-  );
-};
+  )
+}
 
-export default Testimonial;
+export default Testimonial
