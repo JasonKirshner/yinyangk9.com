@@ -20,7 +20,7 @@ export default function MyApp ({ Component, pageProps }) {
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <meta
           property='og:image'
-          content='./logo.png'
+          content='/logo.png'
         />
         <meta
           property='og:description'
@@ -29,7 +29,7 @@ export default function MyApp ({ Component, pageProps }) {
           training and group classes in and around San Diego.'
         />
         <meta property='og:title' content={pageProps.title} />
-        <link rel='icon' type='image/x-icon' href='./logo.png' />
+        <link rel='icon' type='image/x-icon' href='/favicon.ico' />
       </Head>
       <NextNProgress color='#D52129' height={4} options={{ showSpinner: false }} />
       <Navbar />
