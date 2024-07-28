@@ -32,7 +32,7 @@ const InstagramFeed = ({ instagramFeed }) => {
     return (
       <InViewLoad key={i}>
         <Link href={postPermaLink} className={styles.post}>
-          <video autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
+          <video autoPlay controls={false} playsInline loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
             <source src={postMediaUrl} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
