@@ -4,7 +4,7 @@ export function getStaticProps () {
   return { props: { title: 'Privacy Policy' } }
 }
 
-export default function Contact () {
+export default function PrivacyPolicyPage () {
   return (
     <main>
       <PrivacyPolicy />
