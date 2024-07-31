@@ -3,9 +3,9 @@ import Image from 'next/image'
 import styles from './HeroSmall.module.css'
 import InViewLoad from '../InViewLoad/InViewLoad'
 
-const HeroSmall = ({ headerText, backgroundImage }) => {
+const HeroSmall = ({ headerText, backgroundImage, className }) => {
   return (
-    <div className={styles.heroSmall}>
+    <div className={styles.heroSmall + ' ' + styles[className]}>
       <InViewLoad>
         <Image src={backgroundImage} alt='Hero Small Background Image' className={styles.bgImage} priority />
       </InViewLoad>
