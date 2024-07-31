@@ -6,7 +6,8 @@ import InViewLoad from '../InViewLoad/InViewLoad'
 import styles from './InstagramFeed.module.css'
 
 const InstagramFeed = ({ instagramFeed }) => {
-  const renderPosts = instagramFeed.data.slice(0, 8).map((post, i) => {
+  const igFeed = instagramFeed.data.filter(post => post.caption.includes('#yyk9'))
+  const renderPosts = igFeed.slice(0, 8).map((post, i) => {
     const postMediaType = post.media_url.match(/https?.*?\.mp4/) ? 'VIDEO' : 'IMAGE'
     const postCaption = post.caption
     const postPermaLink = post.permalink
