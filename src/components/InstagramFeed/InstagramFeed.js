@@ -16,7 +16,7 @@ const InstagramFeed = ({ instagramFeed }) => {
     if (postMediaType === 'IMAGE') {
       return (
         <InViewLoad key={i}>
-          <Link href={postPermaLink} className={styles.post}>
+          <Link href={postPermaLink} target='_blank' className={styles.post}>
             <Image
               src={postMediaUrl}
               className={styles.media}
@@ -25,6 +25,7 @@ const InstagramFeed = ({ instagramFeed }) => {
               height={0}
               sizes='100vw'
             />
+            <span className={styles.viewPost}>View Post</span>
           </Link>
         </InViewLoad>
       )
@@ -32,11 +33,12 @@ const InstagramFeed = ({ instagramFeed }) => {
 
     return (
       <InViewLoad key={i}>
-        <Link href={postPermaLink} className={styles.post}>
+        <Link href={postPermaLink} target='_blank' className={styles.post}>
           <video autoPlay controls={false} playsInline loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
             <source src={postMediaUrl} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
+          <span className={styles.viewPost}>View Post</span>
         </Link>
       </InViewLoad>
     )
