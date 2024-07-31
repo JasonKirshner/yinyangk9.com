@@ -1,4 +1,9 @@
 .terms {
   margin-top: 100px;
   margin-bottom: 100px;
+
+  @media(--sm) {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
 }
