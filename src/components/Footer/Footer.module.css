@@ -94,3 +94,21 @@
 .socialIcon {
   width: 30px;
 }
+
+.legal {
+  display: flex;
+  margin-top: 10px;
+}
+
+.legalLink {
+  color: black;
+  
+  &:last-child {
+    margin-left: 10px;
+
+    &::before {
+      content: '•';
+      margin-right: 6px;
+    }
+  }
+}

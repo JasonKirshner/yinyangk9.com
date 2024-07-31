@@ -24,6 +24,10 @@ const Footer = () => {
             </Link>
           </InViewLoad>
           <p className={styles.copyright}>© 2024 Yin Yang K9. All Rights Reserved</p>
+          <div className={styles.legal}>
+            <Link href='/privacy-policy' className={`${styles.legalLink} p`}>Privacy Policy</Link>
+            <Link href='/terms-of-service' className={`${styles.legalLink} p`}>Terms Of Service</Link>
+          </div>
         </div>
         <div className={styles.footerRight}>
           <Link href='mailto:yinyangk9@gmail.com' className={styles.contactLink}>
