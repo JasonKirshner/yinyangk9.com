@@ -1,20 +1,4 @@
 .policy {
   margin-top: 100px;
   margin-bottom: 100px;
-
-  h1, h2, h3, h4 {
-    margin-bottom: 20px;
-  }
-
-  h2 {
-    margin-top: 20px;
-  }
-
-  p, ul {
-    margin-bottom: 10px;
-  }
-
-  ul {
-    margin-left: 20px;
-  }
 }

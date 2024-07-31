@@ -186,3 +186,21 @@ video {
     font-size: 16px;
   }
 }
+
+.wysiwyg {
+  h1, h2, h3, h4 {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-top: 20px;
+  }
+
+  p, ul {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+}
