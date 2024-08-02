@@ -60,4 +60,11 @@ export default function handler (req, res) {
     to: process.env.EMAIL,
     from: process.env.EMAIL
   })
+
+  sendEmail({
+    subject: `Email sent!`,
+    text: `Your email has been sent. We will reach out soon!`,
+    to: email,
+    from: process.env.EMAIL
+  })
 }

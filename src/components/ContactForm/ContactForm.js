@@ -22,7 +22,7 @@ const ContactUsForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const sendMessageResponse = await fetch('/api/send-mail', {
+    const response = await fetch('/api/send-mail', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,7 +30,13 @@ const ContactUsForm = () => {
       body: JSON.stringify({ ownersName, dogName, phone, email, message, service })
     })
 
-    responseErrorHandler(sendMessageResponse)
+    if (response.ok) {
+      console.log("good");
+    } else {
+      console.log("bad");
+    }
+
+    responseErrorHandler(response)
   }
 
   const handleChange = (event) => {
@@ -98,7 +104,7 @@ const ContactUsForm = () => {
           fullWidth
         />
         <div className={styles.serviceDropDownWrapper}>
-          <label className={`input-label ${styles.label}`} for='service-dropdown'>Service</label>
+          <label className={`input-label ${styles.label}`} htmlFor='service-dropdown'>Service</label>
           <select id='service-dropdown' className={styles.serviceDropDown} value={service} onChange={handleChange}>
             <option value='board-n-train'>Board & Train</option>
             <option value='boarding'>Boarding</option>
@@ -106,7 +112,7 @@ const ContactUsForm = () => {
             <option value='private-lessons'>Private Lessons</option>
           </select>
           <svg className={styles.chevron} xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 16 16'>
-            <path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708' />
+            <path fillRule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708' />
           </svg>
         </div>
         <Textarea
