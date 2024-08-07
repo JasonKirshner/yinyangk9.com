@@ -10,23 +10,30 @@ import { validation } from '@/lib/js/util'
 
 import heroImage from '../../public/hero_right.png'
 import bgImage from '../../public/hero_bg.png'
-import avatarImage from '../../public/avatar.png'
+
+// Testimonial avatars
+import zara from '../../public/zara.jpeg'
+import udon from '../../public/udon.jpeg'
+import river from '../../public/river.jpeg'
 
 const testimonials = [
   {
-    image: avatarImage,
-    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    name: 'John Doe'
+    image: zara,
+    dogName: 'Zara',
+    testimony: 'If you are looking for a place where your Dog will be well Loved, cared for, have awesome doggie friends and learn good dog behavior, Yin Yang K9 is the place!',
+    name: 'Barbara C.'
   },
   {
-    image: avatarImage,
-    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    name: 'John Doe'
+    image: udon,
+    dogName: 'Udon',
+    testimony: 'My puppy, Udon has made immense progress since joining their "Train & Play" program, and you can just tell that they care so much about the well-being of the pups.',
+    name: 'Sofia C.'
   },
   {
-    image: avatarImage,
-    testimony: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-    name: 'John Doe'
+    image: river,
+    dogName: 'River',
+    testimony: 'It took one call for us to fall in love with them. When we met Jordyn and Dylan in person- we knew it was the right call to make.',
+    name: 'Miriam G'
   }
 ]
 
