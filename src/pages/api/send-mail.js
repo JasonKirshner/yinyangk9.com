@@ -3,7 +3,7 @@ import { google } from 'googleapis'
 
 const OAuth2 = google.auth.OAuth2
 
-export default function handler (req, res) {
+export default async function handler (req, res) {
   // Process a POST request
   const createTransporter = async () => {
     const oauth2Client = new OAuth2(
@@ -48,23 +48,26 @@ export default function handler (req, res) {
 
   const { ownersName, dogsName, phone, email, message, service } = req.body
 
-  sendEmail({
-    subject: `New inquiry from ${ownersName}`,
-    text: `You have received a new inquiry.
-          Owner's Name: ${ownersName}
-          Dog's name: ${dogsName}
-          Phone: ${phone}
-          Email: ${email}
-          Service: ${service}
-          Message: ${message}`,
-    to: process.env.EMAIL,
-    from: process.env.EMAIL
-  })
+  try {
+    // Send the first email
+    await sendEmail({
+      subject: `New inquiry from ${ownersName}`,
+      text: `You have received a new inquiry.\nOwner's Name: ${ownersName}\nDog's Name: ${dogsName}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
+      to: process.env.EMAIL,
+      from: process.env.EMAIL
+    });
 
-  sendEmail({
-    subject: `Email sent!`,
-    text: `Your email has been sent. We will reach out soon!`,
-    to: email,
-    from: process.env.EMAIL
-  })
+    // Send the confirmation email
+    await sendEmail({
+      subject: 'Email sent!',
+      text: 'Your email has been sent. We will reach out soon!',
+      to: email,
+      from: process.env.EMAIL
+    });
+
+    res.status(200).send({ message: 'Email sent successfully! We sent you a confirmation email and we will reach out soon!' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send({ message: 'Error sending email. Please try again later.' });
+  }
 }
