@@ -20,6 +20,7 @@ const ContactUsForm = () => {
   const [service, setService] = useState(queryParamService || "");
 
   const [responseMessage, setResponseMessage] = useState("");
+  const [responseTitle, setResponseTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -36,8 +37,10 @@ const ContactUsForm = () => {
     const data = await response.json();
 
     if (response.ok) {
+      setResponseTitle(data.title);
       setResponseMessage(data.message);
     } else {
+      setResponseTitle(data.title);
       setResponseMessage(data.message);
     }
 
@@ -182,17 +185,14 @@ const ContactUsForm = () => {
           {(onClose) => (
             <>
               <ModalHeader className={styles.modalHeader}>
-                Response
+                <h4>{responseTitle}</h4>
               </ModalHeader>
               <ModalBody>
                 <p>{responseMessage}</p>
               </ModalBody>
               <ModalFooter className={styles.modalFooter}>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button className='button' color="danger" variant="light" onPress={onClose}>
                   Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
                 </Button>
               </ModalFooter>
             </>

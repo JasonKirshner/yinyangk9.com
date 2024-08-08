@@ -65,9 +65,9 @@ export default async function handler (req, res) {
       from: process.env.EMAIL
     });
 
-    res.status(200).send({ message: 'Email sent successfully! We sent you a confirmation email and we will reach out soon!' });
+    res.status(200).send({ title: 'Message sent!', message: 'Email sent successfully! We sent you a confirmation email and we will reach out soon!' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).send({ message: 'Error sending email. Please try again later.' });
+    res.status(500).send({ title: 'Message not sent!', message: 'Please try again.' });
   }
 }

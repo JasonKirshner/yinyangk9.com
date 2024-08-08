@@ -101,9 +101,8 @@
 }
 
 .modalHeader {
-  position: absolute;
-  left: 20px;
-  top: 20px;
+  color: red;
+  margin: 20px;
 }
 
 .modalContent {
@@ -112,7 +111,6 @@
 
 .modalFooter {
   position: absolute;
-  right: 20px;
   bottom: 20px;
 }
 
