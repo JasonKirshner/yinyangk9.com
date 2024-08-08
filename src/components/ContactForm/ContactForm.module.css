@@ -40,6 +40,10 @@
   margin-top: 20px;
 }
 
+.ownersNameLabel {
+  margin-top: 0;
+}
+
 .textarea {
   width: 100%;
   border: none;
@@ -105,10 +109,6 @@
   margin: 20px;
 }
 
-.modalContent {
-
-}
-
 .modalFooter {
   position: absolute;
   bottom: 20px;
@@ -121,4 +121,22 @@
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 51;
+}
+
+.inputError {
+  outline-color: var(--red);
+  border: 1px solid red;
+}
+
+.errorMessage {
+  margin-top: 5px;
+  color: var(--red);
+}
+
+.required {
+  &::after {
+    content: '*';
+    margin-left: 2px;
+    color: var(--red);
+  }
 }
