@@ -45,7 +45,7 @@ export async function getServerSideProps ({ req, res }) {
     'public, s-maxage=1800, stale-while-revalidate=86400'
   )
 
-  return { props: { title: 'Yin Yang K9', instagramFeed } }
+  return { props: { title: 'Yin Yang K9', instagramFeed, home: true } }
 }
 
 export default function Home ({ instagramFeed }) {
