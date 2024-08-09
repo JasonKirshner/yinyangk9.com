@@ -46,28 +46,28 @@ export default async function handler (req, res) {
     await emailTransporter.sendMail(emailOptions)
   }
 
-  const { ownersName, dogsName, phone, email, message, service } = req.body
+  const { ownersName, dogName, phone, email, message, service } = req.body
 
   try {
     // Send the first email
     await sendEmail({
       subject: `New inquiry from ${ownersName}`,
-      text: `You have received a new inquiry.\nOwner's Name: ${ownersName}\nDog's Name: ${dogsName}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
+      text: `You have received a new inquiry.\nOwner's Name: ${ownersName}\nDog's Name: ${dogName}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`,
       to: process.env.EMAIL,
       from: process.env.EMAIL
-    });
+    })
 
     // Send the confirmation email
     await sendEmail({
       subject: 'Email sent!',
-      text: 'Your email has been sent. We will reach out soon!',
+      text: `Hello ${ownersName},\n\nYour message has been sent. We will reach out to you and ${dogName} soon!\n\nBest,\nDylan & Jordyn`,
       to: email,
       from: process.env.EMAIL
-    });
+    })
 
-    res.status(200).send({ title: 'Message sent!', message: 'Email sent successfully! We sent you a confirmation email and we will reach out soon!' });
+    res.status(200).send({ title: 'Message sent!', message: 'We sent you a confirmation email and we will reach out soon!' })
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).send({ title: 'Message not sent!', message: 'Please try again.' });
+    console.error('Error sending email:', error)
+    res.status(500).send({ title: 'Message not sent!', message: 'There was an issue sending your message. Please try again.' })
   }
 }

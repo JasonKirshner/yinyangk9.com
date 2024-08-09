@@ -15,13 +15,16 @@ const ContactUsForm = () => {
   const [message, setMessage] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [service, setService] = useState(queryParamService || 'Select a service')
+
   const [ownersNameError, setOwnersNameError] = useState(false)
   const [dogsNameError, setDogsNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
-  const [service, setService] = useState(queryParamService || 'select-a-service')
+  const [serviceError, setServiceError] = useState(false)
 
   const [responseMessage, setResponseMessage] = useState('')
   const [responseTitle, setResponseTitle] = useState('')
+  const [responseStatus, setResponseStatus] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const validateEmail = (value) => {
@@ -66,6 +69,11 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
+    if (service === 'Select a service') {
+      setServiceError(true)
+      failedValidation = true
+    }
+
     return failedValidation
   }
 
@@ -87,9 +95,11 @@ const ContactUsForm = () => {
     const data = await response.json()
 
     if (response.ok) {
+      setResponseStatus('success')
       setResponseTitle(data.title)
       setResponseMessage(data.message)
     } else {
+      setResponseStatus('fail')
       setResponseTitle(data.title)
       setResponseMessage(data.message)
     }
@@ -98,10 +108,23 @@ const ContactUsForm = () => {
   }
 
   const handleServiceChange = (event) => {
+    if (serviceError) {
+      setServiceError(false)
+    }
+
     setService(event.target.value)
   }
 
   const closeModal = () => {
+    if (responseStatus === 'success') {
+      setOwnersName('')
+      setDogName('')
+      setEmail('')
+      setPhone('')
+      setService('Select a service')
+      setMessage('')
+    }
+
     setIsModalOpen(false)
   }
 
@@ -194,29 +217,32 @@ const ContactUsForm = () => {
           >
             Service
           </label>
-          <select
-            id='service-dropdown'
-            className={styles.serviceDropDown}
-            value={service}
-            onChange={handleServiceChange}
-          >
-            <option value='select-a-service' selected disabled>Select a service</option>
-            <option value='board-n-train'>Board & Train</option>
-            <option value='boarding'>Boarding</option>
-            <option value='train-n-play'>Train & Play</option>
-            <option value='private-lessons'>Private Lessons</option>
-          </select>
-          <svg
-            className={styles.chevron}
-            xmlns='http://www.w3.org/2000/svg'
-            fill='currentColor'
-            viewBox='0 0 16 16'
-          >
-            <path
-              fillRule='evenodd'
-              d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'
-            />
-          </svg>
+          <div className={styles.serviceDropdownSelectWrapper}>
+            <select
+              id='service-dropdown'
+              className={`${styles.serviceDropDown} ${serviceError ? styles.serviceDropDownError : ''}`}
+              value={service}
+              onChange={handleServiceChange}
+            >
+              <option value='Select a service' disabled>Select a service</option>
+              <option value='Board & Train'>Board & Train</option>
+              <option value='Boarding'>Boarding</option>
+              <option value='Train & Play'>Train & Play</option>
+              <option value='Private Lessons'>Private Lessons</option>
+            </select>
+            <svg
+              className={styles.chevron}
+              xmlns='http://www.w3.org/2000/svg'
+              fill='currentColor'
+              viewBox='0 0 16 16'
+            >
+              <path
+                fillRule='evenodd'
+                d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708'
+              />
+            </svg>
+          </div>
+          {serviceError && <p className={styles.errorMessage}>Please select a service</p>}
         </div>
         <Textarea
           require
@@ -247,6 +273,26 @@ const ContactUsForm = () => {
         isDismissable={false}
         isKeyboardDismissDisabled
         className={styles.modal}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                duration: 0,
+                ease: 'easeOut'
+              }
+            },
+            exit: {
+              y: 0,
+              opacity: 0,
+              transition: {
+                duration: 0,
+                ease: 'easeOut'
+              }
+            }
+          }
+        }}
         classNames={{
           closeButton: styles.closeButton,
           backdrop: styles.backdrop
@@ -255,10 +301,10 @@ const ContactUsForm = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className={styles.modalHeader}>
+              <ModalHeader className={`${styles.modalHeader} ${responseStatus === 'success' ? styles.modalHeaderSuccess : styles.modalHeaderFail}`}>
                 <h4>{responseTitle}</h4>
               </ModalHeader>
-              <ModalBody>
+              <ModalBody className={styles.modalBody}>
                 <p>{responseMessage}</p>
               </ModalBody>
               <ModalFooter className={styles.modalFooter}>
