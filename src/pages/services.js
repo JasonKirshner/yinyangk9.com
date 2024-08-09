@@ -60,6 +60,7 @@ export default function ServicePage () {
       <HeroSmall
         headerText='Services'
         backgroundImage={dogsKissing}
+        className='services'
       />
       <ServiceDetails services={services} />
       <FooterCTA />

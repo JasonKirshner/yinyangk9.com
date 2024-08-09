@@ -26,6 +26,10 @@
   @media(--md) {
     object-position: 15% 20%;
   }
+
+  .services & {
+    object-position: 70% 0;
+  }
 }
 
 .headerText {

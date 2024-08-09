@@ -54,6 +54,25 @@ img {
 
 video {
   pointer-events: none;
+
+  &::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  &::-webkit-media-controls-panel { 
+    display: none! important; 
+    -webkit-appearance: none; 
+  }
+  
+  &::--webkit-media-controls-play-button { 
+    display: none! important; 
+    -webkit-appearance: none; 
+  }
+
+  &::-webkit-media-controls-start-playback-button { 
+    display: none! important; 
+    -webkit-appearance: none; 
+  }
 }
 
 .container {
@@ -172,4 +191,22 @@ video {
 input, textarea, select {
   font-sie: 13px;
   font-family: var(--inter);
+}
+
+.wysiwyg {
+  h1, h2, h3, h4 {
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-top: 20px;
+  }
+
+  p, ul {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
 }

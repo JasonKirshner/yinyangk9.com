@@ -6,7 +6,8 @@ import InViewLoad from '../InViewLoad/InViewLoad'
 import styles from './InstagramFeed.module.css'
 
 const InstagramFeed = ({ instagramFeed }) => {
-  const renderPosts = instagramFeed.data.slice(0, 8).map((post, i) => {
+  const igFeed = instagramFeed.data.filter(post => post.caption.includes('#yyk9'))
+  const renderPosts = igFeed.slice(0, 8).map((post, i) => {
     const postMediaType = post.media_url.match(/https?.*?\.mp4/) ? 'VIDEO' : 'IMAGE'
     const postCaption = post.caption
     const postPermaLink = post.permalink
@@ -15,7 +16,7 @@ const InstagramFeed = ({ instagramFeed }) => {
     if (postMediaType === 'IMAGE') {
       return (
         <InViewLoad key={i}>
-          <Link href={postPermaLink} className={styles.post}>
+          <Link href={postPermaLink} target='_blank' className={styles.post}>
             <Image
               src={postMediaUrl}
               className={styles.media}
@@ -24,6 +25,7 @@ const InstagramFeed = ({ instagramFeed }) => {
               height={0}
               sizes='100vw'
             />
+            <span className={styles.viewPost}>View Post</span>
           </Link>
         </InViewLoad>
       )
@@ -31,11 +33,12 @@ const InstagramFeed = ({ instagramFeed }) => {
 
     return (
       <InViewLoad key={i}>
-        <Link href={postPermaLink} className={styles.post}>
-          <video autoPlay loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
+        <Link href={postPermaLink} target='_blank' className={styles.post}>
+          <video autoPlay controls={false} playsInline loop muted disablePictureInPicture disableRemotePlayback className={styles.media}>
             <source src={postMediaUrl} type='video/mp4' />
             Your browser does not support the video tag.
           </video>
+          <span className={styles.viewPost}>View Post</span>
         </Link>
       </InViewLoad>
     )

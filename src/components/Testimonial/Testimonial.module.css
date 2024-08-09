@@ -26,12 +26,20 @@
 }
 
 .avatar {
-  width: 60px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100px;
+  border-radius: 50%;
+}
+
+.dogName {
+  color: var(--white);
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
 
 .text {
   color: var(--white);
-  margin-top: 20px;
 }
 
 .name {

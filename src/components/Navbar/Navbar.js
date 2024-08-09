@@ -26,13 +26,13 @@ const Navbar = () => {
           </Link>
         </InViewLoad>
         <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '')}>
-          <Link className={styles.navLink} href='/about'>
+          <Link className={styles.navLink} href='/about' onClick={toggleMenu}>
             About
           </Link>
-          <Link className={styles.navLink} href='/services'>
+          <Link className={styles.navLink} href='/services' onClick={toggleMenu}>
             Services
           </Link>
-          <Link className={`${styles.navLink} button`} href='/contact'>
+          <Link className={`${styles.navLink} button`} href='/contact' onClick={toggleMenu}>
             Contact Us
           </Link>
         </div>

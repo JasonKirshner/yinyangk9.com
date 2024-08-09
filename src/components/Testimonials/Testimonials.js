@@ -8,6 +8,7 @@ const Testimonials = ({ title, testimonials }) => {
       <Testimonial
         key={i}
         name={testimonial.name}
+        dogName={testimonial.dogName}
         text={testimonial.testimony}
         image={testimonial.image}
       />
