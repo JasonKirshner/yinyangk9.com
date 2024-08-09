@@ -2,6 +2,7 @@
 
 :root {  
   --red: #D52129;
+  --green: #00CC00;
   --white: #fff;
   --black: #000;
   --gray: #D5D5D4;
@@ -185,6 +186,11 @@ video {
   @media(--lg) {
     font-size: 16px;
   }
+}
+
+input, textarea, select {
+  font-sie: 13px;
+  font-family: var(--inter);
 }
 
 .wysiwyg {
