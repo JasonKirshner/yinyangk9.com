@@ -157,3 +157,18 @@
     color: var(--red);
   }
 }
+
+.checkboxWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+}
+
+.link {
+  color: blue;
+  font-weight: bold;
+  text-decoration: underline;
+}
