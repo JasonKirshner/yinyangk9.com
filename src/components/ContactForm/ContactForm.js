@@ -2,7 +2,8 @@
 
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Input, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
+import { Input, Checkbox, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
+import Link from 'next/link'
 
 import styles from './ContactForm.module.css'
 
@@ -17,12 +18,19 @@ const ContactUsForm = () => {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [service, setService] = useState(queryParamService || 'Select a service')
+  const [agreedToTerms, setAgreedToTerms] = useState(false)
+  const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
 
   // Form field error states
   const [ownersNameError, setOwnersNameError] = useState(false)
   const [dogsNameError, setDogsNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [serviceError, setServiceError] = useState(false)
+  const [agreedToTermsError, setAgreedToTermsError] = useState(false)
+  const [agreedToPrivacyError, setAgreedToPrivacyError] = useState(false)
+
+  // Validation state
+  const [isFormInvalid, setIsFormInvalid] = useState(false)
 
   // Modal states
   const [responseMessage, setResponseMessage] = useState('')
@@ -60,7 +68,11 @@ const ContactUsForm = () => {
   }
 
   const validatePhoneNumber = (value) => {
-    return value.match(/^[+]?(1-|1\s|1|\d{3}-|\d{3}\s|)?((\(\d{3}\))|\d{3})(-|\s)?(\d{3})(-|\s)?(\d{4})$/g) !== null
+    return (
+      value.match(
+        /^[+]?(1-|1\s|1|\d{3}-|\d{3}\s|)?((\(\d{3}\))|\d{3})(-|\s)?(\d{3})(-|\s)?(\d{4})$/g
+      ) !== null
+    )
   }
 
   const isEmailInvalid = useMemo(() => {
@@ -79,7 +91,9 @@ const ContactUsForm = () => {
     return !validatePhoneNumber(phone)
   }, [phone])
 
-  const validateForm = () => {
+  const validateForm = (e) => {
+    e.preventDefault()
+
     let failedValidation = false
 
     if (!validateEmail(email)) {
@@ -102,15 +116,25 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
-    return failedValidation
+    if (agreedToTerms === false) {
+      setAgreedToTermsError(true)
+      failedValidation = true
+    }
+
+    if (agreedToPrivacy === false) {
+      setAgreedToPrivacyError(true)
+      failedValidation = true
+    }
+
+    return setIsFormInvalid(failedValidation)
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    if (validateForm()) {
+    if (isFormInvalid) {
       return
     }
+
+    e.preventDefault()
 
     try {
       const formTarget = e.target
@@ -157,6 +181,8 @@ const ContactUsForm = () => {
       setPhone('')
       setService('Select a service')
       setMessage('')
+      setAgreedToTerms(false)
+      setAgreedToPrivacy(false)
     }
 
     setIsModalOpen(false)
@@ -184,7 +210,12 @@ const ContactUsForm = () => {
           errorMessage='Please enter a name'
           classNames={{
             base: styles.fieldWrapper,
-            label: [styles.label, styles.ownersNameLabel, styles.required, 'input-label'],
+            label: [
+              styles.label,
+              styles.ownersNameLabel,
+              styles.required,
+              'input-label'
+            ],
             input: [styles.input, ownersNameError && styles.inputError],
             errorMessage: styles.errorMessage
           }}
@@ -244,7 +275,10 @@ const ContactUsForm = () => {
           classNames={{
             base: styles.fieldWrapper,
             label: [styles.label, styles.required, 'input-label'],
-            input: [styles.input, (isEmailInvalid || emailError) && styles.inputError],
+            input: [
+              styles.input,
+              (isEmailInvalid || emailError) && styles.inputError
+            ],
             errorMessage: styles.errorMessage
           }}
           fullWidth
@@ -264,7 +298,9 @@ const ContactUsForm = () => {
               value={service}
               onChange={handleServiceChange}
             >
-              <option value='Select a service' disabled>Select a service</option>
+              <option value='Select a service' disabled>
+                Select a service
+              </option>
               <option value='Board & Train'>Board & Train</option>
               <option value='Boarding'>Boarding</option>
               <option value='Train & Play'>Train & Play</option>
@@ -282,11 +318,12 @@ const ContactUsForm = () => {
               />
             </svg>
           </div>
-          {serviceError && <p className={styles.errorMessage}>Please select a service</p>}
+          {serviceError && (
+            <p className={styles.errorMessage}>Please select a service</p>
+          )}
         </div>
         <Textarea
           ref={messageRef}
-          require
           id='message'
           minRows={5}
           label='How Can We Help?'
@@ -299,9 +336,58 @@ const ContactUsForm = () => {
           }}
           fullWidth
         />
+        <div className={styles.checkboxContainer}>
+          <Checkbox
+            name='termsOfServiceAgreement'
+            onChange={() => {
+              const newAgreedToTermsValue = !agreedToTerms
+              setAgreedToTerms(newAgreedToTermsValue)
+              if (newAgreedToTermsValue) {
+                setAgreedToTermsError(false)
+              }
+            }}
+            isRequired
+            classNames={{
+              base: [styles.checkboxBase, styles.termsBase, agreedToTermsError && styles.checkboxBaseError],
+              wrapper: styles.checkboxWrapper,
+              icon: styles.checkboxIcon,
+              label: styles.required
+            }}
+          >
+            I have read and agree to the website{' '}
+            <Link
+              href='/terms-of-service'
+              target='_blank' className={styles.link}
+            >
+              terms of service
+            </Link>
+          </Checkbox>
+          <Checkbox
+            name='privacyPolicyAgreement'
+            onChange={() => {
+              const newAgreedToPrivacyValue = !agreedToPrivacy
+              setAgreedToPrivacy(newAgreedToPrivacyValue)
+              if (newAgreedToPrivacyValue) {
+                setAgreedToPrivacyError(false)
+              }
+            }}
+            classNames={{
+              base: [styles.checkboxBase, styles.privacyBase, agreedToPrivacyError && styles.checkboxBaseError],
+              wrapper: styles.checkboxWrapper,
+              icon: styles.checkboxIcon,
+              label: styles.required
+            }}
+          >
+            I have read and agree to the website{' '}
+            <Link href='/privacy-policy' target='_blank' className={styles.link}>
+              privacy policy
+            </Link>
+          </Checkbox>
+        </div>
         <button
           type='submit'
           className={`button ${styles.sendBtn}`}
+          onClick={validateForm}
         >
           Send
         </button>
@@ -341,14 +427,25 @@ const ContactUsForm = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className={`${styles.modalHeader} ${responseStatus === 'success' ? styles.modalHeaderSuccess : styles.modalHeaderFail}`}>
+              <ModalHeader
+                className={`${styles.modalHeader} ${
+                  responseStatus === 'success'
+                    ? styles.modalHeaderSuccess
+                    : styles.modalHeaderFail
+                }`}
+              >
                 <h4>{responseTitle}</h4>
               </ModalHeader>
               <ModalBody className={styles.modalBody}>
                 <p>{responseMessage}</p>
               </ModalBody>
               <ModalFooter className={styles.modalFooter}>
-                <Button className='button' color='danger' variant='light' onPress={onClose}>
+                <Button
+                  className='button'
+                  color='danger'
+                  variant='light'
+                  onPress={onClose}
+                >
                   Close
                 </Button>
               </ModalFooter>
