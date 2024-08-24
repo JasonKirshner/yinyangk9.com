@@ -29,6 +29,9 @@ const ContactUsForm = () => {
   const [agreedToTermsError, setAgreedToTermsError] = useState(false)
   const [agreedToPrivacyError, setAgreedToPrivacyError] = useState(false)
 
+  // Validation state
+  const [isFormInvalid, setIsFormInvalid] = useState(false)
+
   // Modal states
   const [responseMessage, setResponseMessage] = useState('')
   const [responseTitle, setResponseTitle] = useState('')
@@ -88,7 +91,9 @@ const ContactUsForm = () => {
     return !validatePhoneNumber(phone)
   }, [phone])
 
-  const validateForm = () => {
+  const validateForm = (e) => {
+    e.preventDefault()
+
     let failedValidation = false
 
     if (!validateEmail(email)) {
@@ -111,25 +116,25 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
-    if (agreeToTerms == false) {
+    if (agreedToTerms === false) {
       setAgreedToTermsError(true)
       failedValidation = true
     }
 
-    if (agreeToPrivacy == false) {
+    if (agreedToPrivacy === false) {
       setAgreedToPrivacyError(true)
       failedValidation = true
     }
 
-    return failedValidation
+    return setIsFormInvalid(failedValidation)
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    if (validateForm()) {
+    if (isFormInvalid) {
       return
     }
+
+    e.preventDefault()
 
     try {
       const formTarget = e.target
@@ -319,7 +324,6 @@ const ContactUsForm = () => {
         </div>
         <Textarea
           ref={messageRef}
-          require
           id='message'
           minRows={5}
           label='How Can We Help?'
@@ -332,36 +336,58 @@ const ContactUsForm = () => {
           }}
           fullWidth
         />
-        <Checkbox
-          name='termsOfServiceAgreement'
-          onChange={() => { setAgreedToTerms(!agreedToTerms) }}
-          isRequired
-          isSelected={agreedToTerms}
-          isInvalid={agreedToTermsError}
-        >
-          I have read and agree to the website{' '}
-          <Link
-            href='/terms-of-service'
-            target='_blank' className={styles.link}
+        <div className={styles.checkboxContainer}>
+          <Checkbox
+            name='termsOfServiceAgreement'
+            onChange={() => {
+              const newAgreedToTermsValue = !agreedToTerms
+              setAgreedToTerms(newAgreedToTermsValue)
+              if (newAgreedToTermsValue) {
+                setAgreedToTermsError(false)
+              }
+            }}
+            isRequired
+            classNames={{
+              base: [styles.checkboxBase, styles.termsBase, agreedToTermsError && styles.checkboxBaseError],
+              wrapper: styles.checkboxWrapper,
+              icon: styles.checkboxIcon,
+              label: styles.required
+            }}
           >
-            terms of service
-          </Link>
-        </Checkbox>
-        <Checkbox
-          name='privacyPolicyAgreement'
-          onChange={() => { setAgreedToPrivacy(!agreedToPrivacy) }}
-          isRequired
-          isSelected={agreedToPrivacy}
-          isInvalid={agreedToPrivacyError}
-        >
-          I have read and agree to the website{' '}
-          <Link href='/privacy-policy' target='_blank' className={styles.link}>
-            privacy policy
-          </Link>
-        </Checkbox>
+            I have read and agree to the website{' '}
+            <Link
+              href='/terms-of-service'
+              target='_blank' className={styles.link}
+            >
+              terms of service
+            </Link>
+          </Checkbox>
+          <Checkbox
+            name='privacyPolicyAgreement'
+            onChange={() => {
+              const newAgreedToPrivacyValue = !agreedToPrivacy
+              setAgreedToPrivacy(newAgreedToPrivacyValue)
+              if (newAgreedToPrivacyValue) {
+                setAgreedToPrivacyError(false)
+              }
+            }}
+            classNames={{
+              base: [styles.checkboxBase, styles.privacyBase, agreedToPrivacyError && styles.checkboxBaseError],
+              wrapper: styles.checkboxWrapper,
+              icon: styles.checkboxIcon,
+              label: styles.required
+            }}
+          >
+            I have read and agree to the website{' '}
+            <Link href='/privacy-policy' target='_blank' className={styles.link}>
+              privacy policy
+            </Link>
+          </Checkbox>
+        </div>
         <button
           type='submit'
           className={`button ${styles.sendBtn}`}
+          onClick={validateForm}
         >
           Send
         </button>
