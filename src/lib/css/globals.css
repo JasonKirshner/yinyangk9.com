@@ -64,7 +64,7 @@ video {
     -webkit-appearance: none; 
   }
   
-  &::--webkit-media-controls-play-button { 
+  &::state(webkit-media-controls-play-button) { 
     display: none! important; 
     -webkit-appearance: none; 
   }
