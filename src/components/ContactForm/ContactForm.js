@@ -116,7 +116,7 @@ const ContactUsForm = () => {
       const formTarget = e.target
       const formData = new FormData(formTarget)
 
-      const response = await fetch('/', {
+      const response = await fetch('/__contact_form.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData).toString()
