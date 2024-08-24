@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Input, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
 
@@ -10,22 +10,50 @@ const ContactUsForm = () => {
   const searchParams = useSearchParams()
   const queryParamService = searchParams.get('service')
 
+  // Form field states
   const [ownersName, setOwnersName] = useState('')
-  const [dogName, setDogName] = useState('')
+  const [dogsName, setDogsName] = useState('')
   const [message, setMessage] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [service, setService] = useState(queryParamService || 'Select a service')
 
+  // Form field error states
   const [ownersNameError, setOwnersNameError] = useState(false)
   const [dogsNameError, setDogsNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [serviceError, setServiceError] = useState(false)
 
+  // Modal states
   const [responseMessage, setResponseMessage] = useState('')
   const [responseTitle, setResponseTitle] = useState('')
   const [responseStatus, setResponseStatus] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  // Form field refs
+  const ownersNameRef = useRef(null)
+  const dogsNameRef = useRef(null)
+  const phoneRef = useRef(null)
+  const emailRef = useRef(null)
+  const messageRef = useRef(null)
+
+  useEffect(() => {
+    if (!ownersNameRef.current.hasAttribute('name')) {
+      ownersNameRef.current.setAttribute('name', 'ownersName')
+    }
+    if (!dogsNameRef.current.hasAttribute('name')) {
+      dogsNameRef.current.setAttribute('name', 'dogsName')
+    }
+    if (!phoneRef.current.hasAttribute('name')) {
+      phoneRef.current.setAttribute('name', 'phone')
+    }
+    if (!emailRef.current.hasAttribute('name')) {
+      emailRef.current.setAttribute('name', 'email')
+    }
+    if (!messageRef.current.hasAttribute('name')) {
+      messageRef.current.setAttribute('name', 'message')
+    }
+  }, [])
 
   const validateEmail = (value) => {
     return value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i) !== null
@@ -64,7 +92,7 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
-    if (dogName === '') {
+    if (dogsName === '') {
       setDogsNameError(true)
       failedValidation = true
     }
@@ -84,27 +112,33 @@ const ContactUsForm = () => {
       return
     }
 
-    const response = await fetch('/api/send-mail', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ ownersName, dogName, phone, email, message, service })
-    })
+    try {
+      const formTarget = e.target
+      const formData = new FormData(formTarget)
 
-    const data = await response.json()
+      const response = await fetch('/__contact_form.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
 
-    if (response.ok) {
-      setResponseStatus('success')
-      setResponseTitle(data.title)
-      setResponseMessage(data.message)
-    } else {
+      if (response.ok) {
+        setResponseStatus('success')
+        setResponseTitle('Message sent!')
+        setResponseMessage('We sent you a confirmation email and we will reach out soon!')
+      } else {
+        setResponseStatus('fail')
+        setResponseTitle('Message not sent!')
+        setResponseMessage('There was an issue sending your message. Please try again.')
+      }
+
+      setIsModalOpen(true)
+    } catch (e) {
+      console.error(e)
       setResponseStatus('fail')
-      setResponseTitle(data.title)
-      setResponseMessage(data.message)
+      setResponseTitle('Message not sent!')
+      setResponseMessage('There was an issue sending your message. Please try again.')
     }
-
-    setIsModalOpen(true)
   }
 
   const handleServiceChange = (event) => {
@@ -118,7 +152,7 @@ const ContactUsForm = () => {
   const closeModal = () => {
     if (responseStatus === 'success') {
       setOwnersName('')
-      setDogName('')
+      setDogsName('')
       setEmail('')
       setPhone('')
       setService('Select a service')
@@ -131,8 +165,10 @@ const ContactUsForm = () => {
   return (
     <div id='contactForm' className={`container ${styles.contactContainer}`}>
       <h3 className='h3'>Lets hear about you pup!</h3>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit} name='contact' className={styles.form}>
+        <input type='hidden' name='form-name' value='contact' />
         <Input
+          ref={ownersNameRef}
           required
           id='ownersName'
           type='text'
@@ -155,12 +191,13 @@ const ContactUsForm = () => {
           fullWidth
         />
         <Input
+          ref={dogsNameRef}
           required
           id='dogsName'
           type='text'
           label="Dog's Name"
-          value={dogName}
-          onValueChange={setDogName}
+          value={dogsName}
+          onValueChange={setDogsName}
           isInvalid={dogsNameError}
           errorMessage='Please enter a name'
           onChange={() => {
@@ -177,6 +214,7 @@ const ContactUsForm = () => {
           fullWidth
         />
         <Input
+          ref={phoneRef}
           required
           id='phone'
           type='tel'
@@ -194,6 +232,7 @@ const ContactUsForm = () => {
           fullWidth
         />
         <Input
+          ref={emailRef}
           required
           id='email'
           type='email'
@@ -219,6 +258,7 @@ const ContactUsForm = () => {
           </label>
           <div className={styles.serviceDropdownSelectWrapper}>
             <select
+              name='service'
               id='service-dropdown'
               className={`${styles.serviceDropDown} ${serviceError ? styles.serviceDropDownError : ''}`}
               value={service}
@@ -245,6 +285,7 @@ const ContactUsForm = () => {
           {serviceError && <p className={styles.errorMessage}>Please select a service</p>}
         </div>
         <Textarea
+          ref={messageRef}
           require
           id='message'
           minRows={5}
@@ -261,7 +302,6 @@ const ContactUsForm = () => {
         <button
           type='submit'
           className={`button ${styles.sendBtn}`}
-          onClick={handleSubmit}
         >
           Send
         </button>
