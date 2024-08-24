@@ -25,12 +25,10 @@ const ContactUsForm = () => {
   const [ownersNameError, setOwnersNameError] = useState(false)
   const [dogsNameError, setDogsNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
   const [serviceError, setServiceError] = useState(false)
   const [agreedToTermsError, setAgreedToTermsError] = useState(false)
   const [agreedToPrivacyError, setAgreedToPrivacyError] = useState(false)
-
-  // Validation state
-  const [isFormInvalid, setIsFormInvalid] = useState(false)
 
   // Modal states
   const [responseMessage, setResponseMessage] = useState('')
@@ -39,8 +37,10 @@ const ContactUsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Form field refs
+  const contactFormRef = useRef(null)
   const ownersNameRef = useRef(null)
   const dogsNameRef = useRef(null)
+  const serviceRef = useRef(null)
   const phoneRef = useRef(null)
   const emailRef = useRef(null)
   const messageRef = useRef(null)
@@ -86,32 +86,51 @@ const ContactUsForm = () => {
   }, [email, emailError])
 
   const isPhoneInvalid = useMemo(() => {
-    if (phone === '') return false
+    if (phone === '') {
+      setPhoneError(false)
+      return false
+    }
 
     return !validatePhoneNumber(phone)
   }, [phone])
 
-  const validateForm = (e) => {
-    e.preventDefault()
-
+  const validateForm = () => {
     let failedValidation = false
 
-    if (!validateEmail(email)) {
-      setEmailError(true)
-      failedValidation = true
-    }
-
     if (ownersName === '') {
+      scrollTo(ownersNameRef)
       setOwnersNameError(true)
       failedValidation = true
     }
 
     if (dogsName === '') {
+      if (!failedValidation) {
+        scrollTo(dogsNameRef)
+      }
       setDogsNameError(true)
       failedValidation = true
     }
 
+    if (!validatePhoneNumber(phone) && phone.length > 0) {
+      if (!failedValidation) {
+        scrollTo(phoneRef)
+      }
+      setPhoneError(true)
+      failedValidation = true
+    }
+
+    if (!validateEmail(email)) {
+      if (!failedValidation) {
+        scrollTo(emailRef)
+      }
+      setEmailError(true)
+      failedValidation = true
+    }
+
     if (service === 'Select a service') {
+      if (!failedValidation) {
+        scrollTo(serviceRef)
+      }
       setServiceError(true)
       failedValidation = true
     }
@@ -126,15 +145,15 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
-    return setIsFormInvalid(failedValidation)
+    return failedValidation
   }
 
   const handleSubmit = async (e) => {
-    if (isFormInvalid) {
+    e.preventDefault()
+
+    if (validateForm()) {
       return
     }
-
-    e.preventDefault()
 
     try {
       const formTarget = e.target
@@ -188,14 +207,21 @@ const ContactUsForm = () => {
     setIsModalOpen(false)
   }
 
+  const scrollTo = (field) => {
+    const element = field.current
+    console.log(element)
+    const yOffset = -150
+    const y = element.getBoundingClientRect().top + window.scrollY + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+
   return (
-    <div id='contactForm' className={`container ${styles.contactContainer}`}>
+    <div id='contactForm' ref={contactFormRef} className={`container ${styles.contactContainer}`}>
       <h3 className='h3'>Lets hear about you pup!</h3>
       <form onSubmit={handleSubmit} name='contact' className={styles.form}>
         <input type='hidden' name='form-name' value='contact' />
         <Input
           ref={ownersNameRef}
-          required
           id='ownersName'
           type='text'
           value={ownersName}
@@ -223,7 +249,6 @@ const ContactUsForm = () => {
         />
         <Input
           ref={dogsNameRef}
-          required
           id='dogsName'
           type='text'
           label="Dog's Name"
@@ -246,25 +271,23 @@ const ContactUsForm = () => {
         />
         <Input
           ref={phoneRef}
-          required
           id='phone'
           type='tel'
           label='Phone Number'
           value={phone}
-          isInvalid={isPhoneInvalid}
+          isInvalid={isPhoneInvalid || phoneError}
           errorMessage='Please enter a valid Phone Number'
           onValueChange={setPhone}
           classNames={{
             base: styles.fieldWrapper,
             label: [styles.label, 'input-label'],
-            input: [styles.input, isPhoneInvalid && styles.inputError],
+            input: [styles.input, (isPhoneInvalid || phoneError) && styles.inputError],
             errorMessage: styles.errorMessage
           }}
           fullWidth
         />
         <Input
           ref={emailRef}
-          required
           id='email'
           type='email'
           label='Email'
@@ -292,6 +315,7 @@ const ContactUsForm = () => {
           </label>
           <div className={styles.serviceDropdownSelectWrapper}>
             <select
+              ref={serviceRef}
               name='service'
               id='service-dropdown'
               className={`${styles.serviceDropDown} ${serviceError ? styles.serviceDropDownError : ''}`}
@@ -387,7 +411,6 @@ const ContactUsForm = () => {
         <button
           type='submit'
           className={`button ${styles.sendBtn}`}
-          onClick={validateForm}
         >
           Send
         </button>
