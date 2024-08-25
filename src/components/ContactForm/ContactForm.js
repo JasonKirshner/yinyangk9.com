@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Input, Checkbox, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
 import Link from 'next/link'
-import { GoogleReCaptchaProvider, GoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import styles from './ContactForm.module.css'
 
@@ -21,8 +21,6 @@ const ContactUsForm = () => {
   const [service, setService] = useState(queryParamService || 'Select a service')
   const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
-  const [token, setToken] = useState(false)
-  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false)
 
   // Form field error states
   const [ownersNameError, setOwnersNameError] = useState(false)
@@ -32,7 +30,6 @@ const ContactUsForm = () => {
   const [serviceError, setServiceError] = useState(false)
   const [agreedToTermsError, setAgreedToTermsError] = useState(false)
   const [agreedToPrivacyError, setAgreedToPrivacyError] = useState(false)
-  const [recaptchaError, setRecaptchaError] = useState(false)
 
   // Modal states
   const [responseMessage, setResponseMessage] = useState('')
@@ -48,6 +45,8 @@ const ContactUsForm = () => {
   const phoneRef = useRef()
   const emailRef = useRef()
   const messageRef = useRef()
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   useEffect(() => {
     if (!ownersNameRef.current.hasAttribute('name')) {
@@ -149,11 +148,6 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
-    if (!token) {
-      setRecaptchaError(true)
-      failedValidation = true
-    }
-
     return failedValidation
   }
 
@@ -168,6 +162,26 @@ const ContactUsForm = () => {
       const formTarget = e.target
       const formData = new FormData(formTarget)
 
+      if (!executeRecaptcha) {
+        console.log('Execute recaptcha not available yet')
+        return
+      }
+      const gReCaptchaToken = await executeRecaptcha('verifyFormSubmission')
+
+      const googleRecaptchaVerificationResponse = await fetch('/api/google-recaptcha-verification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gReCaptchaToken
+        })
+      })
+
+      const recaptchaRes = await googleRecaptchaVerificationResponse.json()
+
+      if (recaptchaRes.success) {
+        throw new Error('Google Recaptcha Verification Failure')
+      }
+
       const response = await fetch('/__contact_form.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -178,7 +192,6 @@ const ContactUsForm = () => {
         setResponseStatus('success')
         setResponseTitle('Message sent!')
         setResponseMessage('We will reach out to you soon!')
-        setRefreshReCaptcha(r => !r)
       } else {
         setResponseStatus('fail')
         setResponseTitle('Message not sent!')
@@ -191,6 +204,7 @@ const ContactUsForm = () => {
       setResponseStatus('fail')
       setResponseTitle('Message not sent!')
       setResponseMessage('There was an issue sending your message. Please try again.')
+      setIsModalOpen(true)
     }
   }
 
@@ -201,10 +215,6 @@ const ContactUsForm = () => {
 
     setService(event.target.value)
   }
-
-  const onVerify = useCallback((token) => {
-    setToken(token)
-  }, [])
 
   const closeModal = () => {
     if (responseStatus === 'success') {
@@ -429,15 +439,8 @@ const ContactUsForm = () => {
         >
           Send
         </button>
-        <GoogleReCaptchaProvider reCaptchaKey={process.env.RECAPTCHA_SITE_KEY}>
-          <GoogleReCaptcha
-            className={recaptchaError && styles.recaptchaError}
-            onVerify={onVerify}
-            refreshReCaptcha={refreshReCaptcha}
-          />
-        </GoogleReCaptchaProvider>
-      </form>
 
+      </form>
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
