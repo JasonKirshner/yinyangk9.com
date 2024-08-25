@@ -47,7 +47,7 @@ const InstagramFeed = ({ instagramFeed }) => {
   return (
     <div className={styles.instagramFeed}>
       <div className={`container ${styles.feedContainer}`}>
-        <Link href='https://www.instagram.com/yinyangk9/' className={`h3 ${styles.title}`}>@yinyangk9</Link>
+        <Link href='https://www.instagram.com/yinyangk9/' className='h3'>@yinyangk9</Link>
         <div className={styles.feed}>
           {renderPosts}
         </div>
