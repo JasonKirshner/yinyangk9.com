@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useMemo, useRef, useEffect } from 'react'
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Input, Checkbox, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
 import Link from 'next/link'
+import { GoogleReCaptchaProvider, GoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import styles from './ContactForm.module.css'
 
@@ -20,6 +21,8 @@ const ContactUsForm = () => {
   const [service, setService] = useState(queryParamService || 'Select a service')
   const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [agreedToPrivacy, setAgreedToPrivacy] = useState(false)
+  const [token, setToken] = useState(false)
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false)
 
   // Form field error states
   const [ownersNameError, setOwnersNameError] = useState(false)
@@ -29,6 +32,7 @@ const ContactUsForm = () => {
   const [serviceError, setServiceError] = useState(false)
   const [agreedToTermsError, setAgreedToTermsError] = useState(false)
   const [agreedToPrivacyError, setAgreedToPrivacyError] = useState(false)
+  const [recaptchaError, setRecaptchaError] = useState(false)
 
   // Modal states
   const [responseMessage, setResponseMessage] = useState('')
@@ -37,13 +41,13 @@ const ContactUsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Form field refs
-  const contactFormRef = useRef(null)
-  const ownersNameRef = useRef(null)
-  const dogsNameRef = useRef(null)
-  const serviceRef = useRef(null)
-  const phoneRef = useRef(null)
-  const emailRef = useRef(null)
-  const messageRef = useRef(null)
+  const contactFormRef = useRef()
+  const ownersNameRef = useRef()
+  const dogsNameRef = useRef()
+  const serviceRef = useRef()
+  const phoneRef = useRef()
+  const emailRef = useRef()
+  const messageRef = useRef()
 
   useEffect(() => {
     if (!ownersNameRef.current.hasAttribute('name')) {
@@ -145,6 +149,11 @@ const ContactUsForm = () => {
       failedValidation = true
     }
 
+    if (!token) {
+      setRecaptchaError(true)
+      failedValidation = true
+    }
+
     return failedValidation
   }
 
@@ -168,7 +177,8 @@ const ContactUsForm = () => {
       if (response.ok) {
         setResponseStatus('success')
         setResponseTitle('Message sent!')
-        setResponseMessage('We sent you a confirmation email and we will reach out soon!')
+        setResponseMessage('We will reach out to you soon!')
+        setRefreshReCaptcha(r => !r)
       } else {
         setResponseStatus('fail')
         setResponseTitle('Message not sent!')
@@ -191,6 +201,10 @@ const ContactUsForm = () => {
 
     setService(event.target.value)
   }
+
+  const onVerify = useCallback((token) => {
+    setToken(token)
+  }, [])
 
   const closeModal = () => {
     if (responseStatus === 'success') {
@@ -370,7 +384,7 @@ const ContactUsForm = () => {
                 setAgreedToTermsError(false)
               }
             }}
-            isRequired
+            value={agreedToTerms ? 'agreed' : 'disagreed'}
             classNames={{
               base: [styles.checkboxBase, styles.termsBase, agreedToTermsError && styles.checkboxBaseError],
               wrapper: styles.checkboxWrapper,
@@ -388,6 +402,7 @@ const ContactUsForm = () => {
           </Checkbox>
           <Checkbox
             name='privacyPolicyAgreement'
+            value={agreedToPrivacy ? 'agreed' : 'disagreed'}
             onChange={() => {
               const newAgreedToPrivacyValue = !agreedToPrivacy
               setAgreedToPrivacy(newAgreedToPrivacyValue)
@@ -414,6 +429,13 @@ const ContactUsForm = () => {
         >
           Send
         </button>
+        <GoogleReCaptchaProvider reCaptchaKey={process.env.RECAPTCHA_SITE_KEY}>
+          <GoogleReCaptcha
+            className={recaptchaError && styles.recaptchaError}
+            onVerify={onVerify}
+            refreshReCaptcha={refreshReCaptcha}
+          />
+        </GoogleReCaptchaProvider>
       </form>
 
       <Modal
