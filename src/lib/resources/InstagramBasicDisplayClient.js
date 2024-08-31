@@ -20,11 +20,17 @@ const getInstagramFeed = async (req, res) => {
     const url = process.env.INSTAGRAM_BASIC_DISPLAY_API_URI + accessToken
     const response = await fetch(url, { next: { revalidate: oneDayInSeconds() } })
 
-    responseErrorHandler(response, 'Instagram Basic Display Api')
+    responseErrorHandler(response, 'Instagram Basic Display Api', (err) => {
+      if (err) {
+        throw err
+      }
+    })
 
     const instagramFeed = await response.json()
 
-    return instagramFeed
+    const filteredInstagramFeed = await filterInstagramFeed(instagramFeed)
+
+    return filteredInstagramFeed
   } catch (err) {
     console.error('Error fetching Instagram feed:', err.message)
 
@@ -40,7 +46,11 @@ const refreshToken = async (accessToken) => {
     const refreshTokenObject = await refreshTokenResponse.json()
     const newAccessToken = refreshTokenObject.access_token
 
-    responseErrorHandler(refreshTokenResponse, 'Refreshing Instagram Basic Display Access Token')
+    responseErrorHandler(refreshTokenResponse, 'Refreshing Instagram Basic Display Access Token', (err) => {
+      if (err) {
+        throw err
+      }
+    })
 
     return newAccessToken
   } catch (err) {
@@ -81,6 +91,38 @@ const retrieveAccessToken = async (req, res) => {
     }
   } else {
     return await getAccessToken(req, res)
+  }
+}
+
+const filterInstagramFeed = async (igFeed) => {
+  const igFeedData = igFeed.data
+  let nextPageURL = igFeed.paging.next
+  let filteredFeed = igFeedData.filter(post => post.caption.includes('#yyk9'))
+
+  try {
+    while (filteredFeed.length < 8 && nextPageURL) {
+      const nextPageRes = await fetch(nextPageURL, { next: { revalidate: oneDayInSeconds() } })
+      responseErrorHandler(nextPageRes, 'Retrieving next Instagram Feed page', (err) => {
+        if (err) {
+          throw err
+        }
+      })
+      const nextPageFeed = await nextPageRes.json()
+      nextPageURL = nextPageFeed.paging?.next
+      const nextPageFeedData = nextPageFeed.data
+      const filteredNextPageFeed = nextPageFeedData.filter(post => post.caption.includes('#yyk9'))
+      filteredFeed.push(...filteredNextPageFeed)
+
+      if (filteredFeed.length > 8) {
+        filteredFeed = filteredFeed.slice(0, 8)
+      }
+    }
+
+    return filteredFeed
+  } catch (error) {
+    console.error(error)
+
+    return null
   }
 }
 

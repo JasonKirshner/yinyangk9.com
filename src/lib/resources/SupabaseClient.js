@@ -34,7 +34,11 @@ export const getAccessToken = async (req, res) => {
       .select('access_token, updated_at')
       .eq('id', 1)
 
-    responseErrorHandler(response, 'Supabase Api (getAccessToken)')
+    responseErrorHandler(response, 'Supabase Api [getAccessToken]', (err) => {
+      if (err) {
+        throw err
+      }
+    })
 
     const accessToken = response.data[0].access_token
     const lastUpdate = response.data[0].updated_at
@@ -74,7 +78,11 @@ export const updateAccessToken = async (req, res, newAccessToken) => {
       .eq('id', 1)
       .select('updated_at')
 
-    responseErrorHandler(response, 'Supabase Api (updateAccessToken)')
+    responseErrorHandler(response, 'Supabase Api [updateAccessToken]', (err) => {
+      if (err) {
+        throw err
+      }
+    })
 
     const lastUpdate = response.data[0].updated_at
     accessTokenObj = { token: newAccessToken, lastUpdate, errorRes: null }

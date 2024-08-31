@@ -13,7 +13,7 @@ export const oneDayInFuture = () => {
   return date
 }
 
-export const responseErrorHandler = async (res, resourceName) => {
+export const responseErrorHandler = (res, resourceName, fn) => {
   let message = null
 
   if (res?.error) {
@@ -23,9 +23,9 @@ export const responseErrorHandler = async (res, resourceName) => {
   }
 
   if (res.statusText !== 'OK' || res.error || res.status > 399) {
-    throw new Error(`Error occurred while fetching ${resourceName} - HttpStatus: ${res.status} | Message: ${message}`)
+    fn(new Error(`Error occurred while fetching ${resourceName} - HttpStatus: ${res.status} | Message: ${message}`))
   } else if (res.data === null || res.data?.length < 1) {
-    throw new Error(`Error occurred while fetching from ${resourceName} - HttpStatus: ${res.status} | Message: data is missing`)
+    fn(new Error(`Error occurred while fetching from ${resourceName} - HttpStatus: ${res.status} | Message: data is missing`))
   }
 }
 
