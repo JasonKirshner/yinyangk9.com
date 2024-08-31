@@ -17,7 +17,7 @@ export default function MyApp ({ Component, pageProps }) {
           training and group classes in and around San Diego.'
         />
         <meta charSet='utf-8' />
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no' />
         <meta
           property='og:image'
           content='/logo.png'
