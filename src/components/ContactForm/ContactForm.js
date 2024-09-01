@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Input, Checkbox, Textarea, Modal, ModalContent, ModalHeader, ModalFooter, ModalBody, Button } from '@nextui-org/react'
 import Link from 'next/link'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import styles from './ContactForm.module.css'
 
@@ -37,13 +38,15 @@ const ContactUsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Form field refs
-  const contactFormRef = useRef(null)
-  const ownersNameRef = useRef(null)
-  const dogsNameRef = useRef(null)
-  const serviceRef = useRef(null)
-  const phoneRef = useRef(null)
-  const emailRef = useRef(null)
-  const messageRef = useRef(null)
+  const contactFormRef = useRef()
+  const ownersNameRef = useRef()
+  const dogsNameRef = useRef()
+  const serviceRef = useRef()
+  const phoneRef = useRef()
+  const emailRef = useRef()
+  const messageRef = useRef()
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   useEffect(() => {
     if (!ownersNameRef.current.hasAttribute('name')) {
@@ -159,6 +162,26 @@ const ContactUsForm = () => {
       const formTarget = e.target
       const formData = new FormData(formTarget)
 
+      if (!executeRecaptcha) {
+        console.log('Execute recaptcha not available yet')
+        return
+      }
+      const gReCaptchaToken = await executeRecaptcha('verifyFormSubmission')
+
+      const googleRecaptchaVerificationResponse = await fetch('/api/google-recaptcha-verification', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gReCaptchaToken
+        })
+      })
+
+      const recaptchaRes = await googleRecaptchaVerificationResponse.json()
+
+      if (recaptchaRes.success) {
+        throw new Error('Google Recaptcha Verification Failure')
+      }
+
       const response = await fetch('/__contact_form.html', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -168,7 +191,7 @@ const ContactUsForm = () => {
       if (response.ok) {
         setResponseStatus('success')
         setResponseTitle('Message sent!')
-        setResponseMessage('We sent you a confirmation email and we will reach out soon!')
+        setResponseMessage('We will reach out to you soon!')
       } else {
         setResponseStatus('fail')
         setResponseTitle('Message not sent!')
@@ -181,6 +204,7 @@ const ContactUsForm = () => {
       setResponseStatus('fail')
       setResponseTitle('Message not sent!')
       setResponseMessage('There was an issue sending your message. Please try again.')
+      setIsModalOpen(true)
     }
   }
 
@@ -370,7 +394,7 @@ const ContactUsForm = () => {
                 setAgreedToTermsError(false)
               }
             }}
-            isRequired
+            value={agreedToTerms ? 'agreed' : 'disagreed'}
             classNames={{
               base: [styles.checkboxBase, styles.termsBase, agreedToTermsError && styles.checkboxBaseError],
               wrapper: styles.checkboxWrapper,
@@ -388,6 +412,7 @@ const ContactUsForm = () => {
           </Checkbox>
           <Checkbox
             name='privacyPolicyAgreement'
+            value={agreedToPrivacy ? 'agreed' : 'disagreed'}
             onChange={() => {
               const newAgreedToPrivacyValue = !agreedToPrivacy
               setAgreedToPrivacy(newAgreedToPrivacyValue)
@@ -414,8 +439,8 @@ const ContactUsForm = () => {
         >
           Send
         </button>
-      </form>
 
+      </form>
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
