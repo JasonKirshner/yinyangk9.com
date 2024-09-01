@@ -22,9 +22,9 @@ export const responseErrorHandler = (res, resourceName, fn) => {
     message = res.statusText
   }
 
-  if (res.statusText !== 'OK' || res.error || res.status > 399) {
+  if (res.error || res.status > 399) {
     fn(new Error(`Error occurred while fetching ${resourceName} - HttpStatus: ${res.status} | Message: ${message}`))
-  } else if (res.data === null || res.data?.length < 1) {
+  } else if (res.data && (res.data === null || res.data?.length < 1)) {
     fn(new Error(`Error occurred while fetching from ${resourceName} - HttpStatus: ${res.status} | Message: data is missing`))
   }
 }
