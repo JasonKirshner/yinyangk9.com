@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/functions": "^2.8.1",
     "@nextui-org/react": "^2.4.1",
     "@supabase/ssr": "^0.4.0",
     "cookies-next": "^4.2.1",
