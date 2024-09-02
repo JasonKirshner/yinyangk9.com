@@ -387,6 +387,7 @@ const ContactUsForm = () => {
         <div className={styles.checkboxContainer}>
           <Checkbox
             name='termsOfServiceAgreement'
+            isSelected={agreedToTerms}
             onChange={() => {
               const newAgreedToTermsValue = !agreedToTerms
               setAgreedToTerms(newAgreedToTermsValue)
@@ -412,6 +413,7 @@ const ContactUsForm = () => {
           </Checkbox>
           <Checkbox
             name='privacyPolicyAgreement'
+            isSelected={agreedToPrivacy}
             value={agreedToPrivacy ? 'agreed' : 'disagreed'}
             onChange={() => {
               const newAgreedToPrivacyValue = !agreedToPrivacy
