@@ -178,7 +178,7 @@ const ContactUsForm = () => {
 
       const recaptchaRes = await googleRecaptchaVerificationResponse.json()
 
-      if (recaptchaRes.success) {
+      if (recaptchaRes.success === false || recaptchaRes.score < 0.5) {
         throw new Error('Google Recaptcha Verification Failure')
       }
 
