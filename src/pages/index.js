@@ -34,6 +34,12 @@ const testimonials = [
     dogName: 'River',
     testimony: 'It took one call for us to fall in love with them. When we met Jordyn and Dylan in person- we knew it was the right call to make.',
     name: 'Miriam G'
+  },
+  {
+    image: river,
+    dogName: 'River',
+    testimony: 'It took one call for us to fall in love with them. When we met Jordyn and Dylan in person- we knew it was the right call to make.',
+    name: 'Miriam G'
   }
 ]
 
