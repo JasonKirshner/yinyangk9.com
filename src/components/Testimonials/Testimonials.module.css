@@ -8,6 +8,8 @@
 .testimonials {
   margin-top: 50px;
   width: 100%;
+  cursor: pointer;
+  overflow: unset;
 }
 
 .testimonialsItem {

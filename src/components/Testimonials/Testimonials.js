@@ -1,4 +1,4 @@
-import React from 'react'
+import { useRef } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
@@ -6,6 +6,7 @@ import styles from './Testimonials.module.css'
 import Testimonial from '../Testimonial/Testimonial'
 
 const Testimonials = ({ title, testimonials }) => {
+  const carousel = useRef()
   const renderTestimonials = () =>
     testimonials.map((testimonial, i) => (
       <Testimonial
@@ -37,18 +38,19 @@ const Testimonials = ({ title, testimonials }) => {
       <div className={`container ${styles.testimonialsContainer}`}>
         <h3 className={styles.title}>{title}</h3>
         <Carousel
+          ref={carousel}
           responsive={responsive}
           ssr
           arrows={false}
           swipeable
+          draggable
           infinite
           autoPlay
-          // autoPlaySpeed={5000}
           containerClass={styles.testimonials}
           itemClass={styles.testimonialsItem}
           deviceType='desktop'
-          customTransition='transform 5s linear'
-          transitionDuration={5000}
+          transitionDuration={8000}
+          customTransition='all 1s'
         >
           {renderTestimonials()}
         </Carousel>
