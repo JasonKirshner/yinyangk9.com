@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Spin as Hamburger } from 'hamburger-react'
 
 import styles from './Navbar.module.css'
@@ -22,7 +21,7 @@ const Navbar = () => {
       <div className={`${styles.navbarContainer} container`}>
         <InViewLoad>
           <Link className={styles.homeLink} href='/'>
-            <Image src={logo} alt='Logo' className={styles.logo} priority />
+            <img src={logo} alt='Logo' className={styles.logo} priority />
           </Link>
         </InViewLoad>
         <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '')}>

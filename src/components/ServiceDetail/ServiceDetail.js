@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import InViewLoad from '../InViewLoad/InViewLoad'
@@ -8,7 +7,7 @@ const ServiceDetail = ({ image, name, code, description, pricing }) => {
   return (
     <div className={styles.service}>
       <InViewLoad>
-        <Image className={styles.image} src={image} alt={`Image for ${name} service`} />
+        <img className={styles.image} src={image} alt={`Image for ${name} service`} />
       </InViewLoad>
       <h3 className={styles.title}>{name}</h3>
       <p className={styles.description}>{description}</p>
