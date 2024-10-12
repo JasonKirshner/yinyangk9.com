@@ -8,7 +8,7 @@ import getInstagramFeed from '@/lib/resources/InstagramBasicDisplayClient'
 import services from '@/lib/data/services.json'
 import { validation } from '@/lib/js/util'
 
-import bgImage from '../../public/hero_bg.png'
+import bgImage from '../../public/hero_bg.webp'
 
 const testimonials = [
   {
@@ -64,7 +64,7 @@ export default function Home ({ instagramFeed }) {
   return (
     <main>
       <Hero
-        image='/hero_right.png'
+        image='/hero_right.webp'
         bgImage={bgImage}
         title='Expert Dog Training'
         description='Yin Yang K9 is based in San Diego, California. Offering a variety of private dog training, day training and group classes in and around San Diego.'
