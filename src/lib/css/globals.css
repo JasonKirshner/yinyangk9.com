@@ -212,7 +212,7 @@ input, textarea, select {
 }
 
 .react-multi-carousel-list {
-  position: initial;
+  position: initial !important;
 }
 
 .react-multiple-carousel__arrow {
