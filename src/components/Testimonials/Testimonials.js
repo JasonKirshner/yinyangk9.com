@@ -42,6 +42,7 @@ const Testimonials = ({ title, testimonials }) => {
           responsive={responsive}
           renderArrowsWhenDisabled
           ssr
+          showDots
           arrows
           swipeable
           draggable
