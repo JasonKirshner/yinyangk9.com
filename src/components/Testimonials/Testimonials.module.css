@@ -6,14 +6,14 @@
 }
 
 .testimonials {
-  display: flex;
-  justify-content: space-between;
   margin-top: 50px;
+  width: 100%;
+  cursor: pointer;
+  overflow: unset;
+}
 
-  @media(--md) {
-    flex-direction: column;
-    align-items: center;
-  }
+.testimonialsItem {
+  padding: 0 20px;
 }
 
 .title {

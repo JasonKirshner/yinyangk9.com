@@ -36,7 +36,7 @@ const Footer = () => {
           </Link>
           <Link href='tel:+(760) 855-5667' className={styles.contactLink}>
             <Image src={phoneImage} alt='Phone Icon' className={styles.contactIcon} />
-            <p className={styles.contactLabel}>+(760) 855-5667</p>
+            <p className={styles.contactLabel}>(858) 280-5610</p>
           </Link>
           <Link href='https://www.instagram.com/yinyangk9/' className={styles.contactLink}>
             <Image src={igImage} alt='Facebook Icon' className={styles.contactIcon} />

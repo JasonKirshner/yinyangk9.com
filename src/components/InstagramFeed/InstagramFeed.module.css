@@ -76,3 +76,16 @@
     opacity: 1;
   }
 }
+
+.instaTitle {
+  display: flex;
+}
+
+.instaLogo {
+  width: 25px;
+  margin-left: 10px;
+}
+
+.instaAt {
+  margin-top: 20px;
+}
