@@ -1,6 +1,5 @@
 import styles from './FooterCTA.module.css'
 import Link from 'next/link'
-import Image from 'next/image'
 
 import pawsLeft from '../../../public/paws_left.png'
 import pawsRight from '../../../public/paws_right.png'
@@ -15,10 +14,10 @@ const FooterCTA = () => {
           Contact Us
         </Link>
         <InViewLoad>
-          <Image src={pawsLeft} alt='Paws Left' className={styles.pawsLeft} />
+          <img src={pawsLeft} alt='Paws Left' className={styles.pawsLeft} />
         </InViewLoad>
         <InViewLoad>
-          <Image src={pawsRight} alt='Paws Right' className={styles.pawsRight} />
+          <img src={pawsRight} alt='Paws Right' className={styles.pawsRight} />
         </InViewLoad>
       </div>
     </div>

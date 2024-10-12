@@ -1,5 +1,3 @@
-import Image from 'next/image'
-
 import styles from './About.module.css'
 import InViewLoad from '../InViewLoad/InViewLoad'
 
@@ -13,15 +11,15 @@ const About = ({ title, paragraphs, image1, image2, paws }) => {
           <p>{paragraphs[1]}</p>
         </div>
         <InViewLoad>
-          <Image className={styles.img} src={image1} alt='Family Image' />
+          <img className={styles.img} src={image1} alt='Family Image' />
         </InViewLoad>
       </div>
       <InViewLoad>
-        <Image className={styles.paws} src={paws} alt='Paw prints' />
+        <img className={styles.paws} src={paws} alt='Paw prints' />
       </InViewLoad>
       <div className={styles.content}>
         <InViewLoad>
-          <Image className={styles.img} src={image2} alt='Petting Dog Image' />
+          <img className={styles.img} src={image2} alt='Petting Dog Image' />
         </InViewLoad>
         <div className={styles.text}>
           <p>{paragraphs[2]}</p>
