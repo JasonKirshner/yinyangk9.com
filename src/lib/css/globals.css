@@ -210,3 +210,22 @@ input, textarea, select {
     margin-left: 20px;
   }
 }
+
+.react-multi-carousel-list {
+  position: initial;
+}
+
+.react-multiple-carousel__arrow {
+  top: 0;
+  border-radius: 0 !important;
+  right: 50px !important;
+
+  @media(--md) {
+    display: none;
+  }
+
+  &--left {
+    right: 93px !important;
+    left: auto !important; 
+  }
+}
