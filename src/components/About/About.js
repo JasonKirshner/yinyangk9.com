@@ -9,7 +9,7 @@ const About = ({ title, paragraphs, image1, image2, paws }) => {
       <div className={styles.content}>
         <div className={styles.text}>
           <h3 className={styles.title}>{title}</h3>
-          <p>{paragraphs[0]}</p>
+          <p className={styles.p}>{paragraphs[0]}</p>
           <p>{paragraphs[1]}</p>
         </div>
         <InViewLoad>
