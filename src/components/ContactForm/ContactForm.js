@@ -241,7 +241,7 @@ const ContactUsForm = () => {
 
   return (
     <div id='contactForm' ref={contactFormRef} className={`container ${styles.contactContainer}`}>
-      <h3 className='h3'>Lets hear about you pup!</h3>
+      <h3 className='h3'>Let's hear about you pup!</h3>
       <form onSubmit={handleSubmit} name='contact' className={styles.form}>
         <input type='hidden' name='form-name' value='contact' />
         <Input
