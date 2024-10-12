@@ -20,9 +20,6 @@ const InstagramFeed = ({ instagramFeed, logo }) => {
               src={postMediaUrl}
               className={styles.media}
               alt={`Instagram Post Caption: ${postCaption}`}
-              // width={0}
-              // height={0}
-              // sizes='100vw'
             />
             <span className={styles.viewPost}>View Post</span>
           </Link>

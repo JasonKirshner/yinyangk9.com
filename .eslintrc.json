@@ -1,4 +1,7 @@
 {
   "parser": "@babel/eslint-parser",
-  "extends": ["standard", "standard-jsx", "standard-react", "next/core-web-vitals", "next"]
+  "extends": ["standard", "standard-jsx", "standard-react", "next/core-web-vitals", "next"],
+  "rules": {
+    "@next/next/no-img-element": "off"
+  }
 }
