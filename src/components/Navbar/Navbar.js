@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className={`${styles.navbarContainer} container`}>
         <InViewLoad>
           <Link className={styles.homeLink} href='/'>
-            <img src='/logo.png' alt='Logo' className={styles.logo} priority />
+            <img src='/logo.webp' alt='Logo' className={styles.logo} priority />
           </Link>
         </InViewLoad>
         <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '')}>

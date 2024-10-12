@@ -19,8 +19,8 @@ export default function AboutUs () {
         title='Jordyn Siordia and Dylan Baquero'
         paragraphs={aboutUsContent}
         image1='/family-image1.png'
-        image2='/petting-dog.png'
-        paws='/Paws.png'
+        image2='/petting-dog.webp'
+        paws='/Paws.webp'
       />
       <FooterCTA />
     </main>

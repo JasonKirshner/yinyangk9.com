@@ -20,7 +20,7 @@ export default function MyApp ({ Component, pageProps }) {
         <meta name='viewport' content='initial-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no' />
         <meta
           property='og:image'
-          content='/logo.png'
+          content='/logo.webp'
         />
         <meta
           property='og:description'

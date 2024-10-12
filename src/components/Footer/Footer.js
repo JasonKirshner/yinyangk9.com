@@ -13,7 +13,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           <InViewLoad>
             <Link className={styles.homeLink} href='/'>
-              <img src='/logo.png' alt='Logo' className={styles.logo} />
+              <img src='/logo.webp' alt='Logo' className={styles.logo} />
             </Link>
           </InViewLoad>
           <p className={styles.copyright}>© 2024 Yin Yang K9. All Rights Reserved</p>
@@ -32,7 +32,7 @@ const Footer = () => {
             <p className={styles.contactLabel}>(858) 280-5610</p>
           </Link>
           <Link href='https://www.instagram.com/yinyangk9/' className={styles.contactLink}>
-            <img src='/instagram.png' alt='Facebook Icon' className={styles.contactIcon} />
+            <img src='/instagram.webp' alt='Facebook Icon' className={styles.contactIcon} />
             <p className={styles.contactLabel}>@yinyangk9</p>
           </Link>
         </div>

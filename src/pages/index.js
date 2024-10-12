@@ -8,7 +8,7 @@ import getInstagramFeed from '@/lib/resources/InstagramBasicDisplayClient'
 import services from '@/lib/data/services.json'
 import { validation } from '@/lib/js/util'
 
-import bgImage from '../../public/hero_bg.png'
+import bgImage from '../../public/hero_bg.webp'
 
 const testimonials = [
   {
@@ -24,7 +24,7 @@ const testimonials = [
     name: 'Sofia C.'
   },
   {
-    image: '/river.jpeg',
+    image: '/river.webp',
     dogName: 'River',
     testimony: 'It took one call for us to fall in love with them. When we met Jordyn and Dylan in person- we knew it was the right call to make.',
     name: 'Miriam G.'
@@ -36,13 +36,13 @@ const testimonials = [
     name: 'Monique R.'
   },
   {
-    image: '/betty_white.jpg',
+    image: '/betty_white.webp',
     dogName: 'Betty White',
     testimony: 'Since our first meeting and after multiple visits to Train N Play, Betty is more confident and self-assured, and she is far more comfortable around other dogs now than before we started Train N Play.',
     name: 'Courtney W.'
   },
   {
-    image: '/alvin.jpg',
+    image: '/alvin.webp',
     dogName: 'Alvin',
     testimony: 'Alvin also attended their "Train & Play" program where they built on the previous leash training sessions and he came back a DIFFERENT puppy.',
     name: 'Jenna'
@@ -64,7 +64,7 @@ export default function Home ({ instagramFeed }) {
   return (
     <main>
       <Hero
-        image='/hero_right.png'
+        image='/hero_right.webp'
         bgImage={bgImage}
         title='Expert Dog Training'
         description='Yin Yang K9 is based in San Diego, California. Offering a variety of private dog training, day training and group classes in and around San Diego.'
@@ -73,7 +73,7 @@ export default function Home ({ instagramFeed }) {
       />
       <Testimonials title='Testimonials' testimonials={testimonials} />
       <Services title='Services' services={services} />
-      {validation(instagramFeed) && <InstagramFeed instagramFeed={instagramFeed} logo='/instagram_logo.png' />}
+      {validation(instagramFeed) && <InstagramFeed instagramFeed={instagramFeed} logo='/instagram_logo.webp' />}
       <FooterCTA />
     </main>
   )

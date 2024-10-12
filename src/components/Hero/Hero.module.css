@@ -6,7 +6,7 @@
   padding: 100px 0;
 
   @media(--lg) and (--md-min) {
-    height: 500px;
+    height: 550px;
   }
 
   @media(--md) {
