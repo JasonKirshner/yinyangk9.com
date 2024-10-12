@@ -5,7 +5,7 @@ import InViewLoad from '../InViewLoad/InViewLoad'
 
 import styles from './InstagramFeed.module.css'
 
-const InstagramFeed = ({ instagramFeed }) => {
+const InstagramFeed = ({ instagramFeed, logo }) => {
   const renderPosts = instagramFeed.map((post, i) => {
     const postMediaType = post.media_url.match(/https?.*?\.mp4/) ? 'VIDEO' : 'IMAGE'
     const postCaption = post.caption
@@ -46,7 +46,11 @@ const InstagramFeed = ({ instagramFeed }) => {
   return (
     <div className={styles.instagramFeed}>
       <div className={`container ${styles.feedContainer}`}>
-        <Link href='https://www.instagram.com/yinyangk9/' className='h3'>@yinyangk9</Link>
+        <div className={styles.instaTitle}>
+          <h3>Follow Us On</h3>
+          <Image className={styles.instaLogo} src={logo} alt='Instagram Logo' />
+        </div>
+        <Link href='https://www.instagram.com/yinyangk9/' className={'h3 ' + styles.instaAt}>@yinyangk9</Link>
         <div className={styles.feed}>
           {renderPosts}
         </div>
