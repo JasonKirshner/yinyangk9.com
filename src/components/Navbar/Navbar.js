@@ -6,7 +6,6 @@ import { Spin as Hamburger } from 'hamburger-react'
 
 import styles from './Navbar.module.css'
 
-import logo from '../../../public/logo.png'
 import InViewLoad from '../InViewLoad/InViewLoad'
 
 const Navbar = () => {
@@ -21,7 +20,7 @@ const Navbar = () => {
       <div className={`${styles.navbarContainer} container`}>
         <InViewLoad>
           <Link className={styles.homeLink} href='/'>
-            <img src={logo} alt='Logo' className={styles.logo} priority />
+            <img src='/logo.png' alt='Logo' className={styles.logo} priority />
           </Link>
         </InViewLoad>
         <div className={`${styles.navbarLinks}` + (isMenuOpen ? ` ${styles.navbarOpen}` : '')}>

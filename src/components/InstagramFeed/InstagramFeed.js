@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 import InViewLoad from '../InViewLoad/InViewLoad'
 
@@ -45,7 +44,7 @@ const InstagramFeed = ({ instagramFeed, logo }) => {
       <div className={`container ${styles.feedContainer}`}>
         <div className={styles.instaTitle}>
           <h3>Follow Us On</h3>
-          <Image className={styles.instaLogo} src={logo} alt='Instagram Logo' />
+          <img className={styles.instaLogo} src={logo} alt='Instagram Logo' />
         </div>
         <Link href='https://www.instagram.com/yinyangk9/' className={'h3 ' + styles.instaAt}>@yinyangk9</Link>
         <div className={styles.feed}>

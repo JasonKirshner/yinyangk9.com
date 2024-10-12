@@ -4,11 +4,6 @@ import About from '@/components/About/About'
 
 import aboutUsContent from '@/lib/data/aboutUs.json'
 
-import familyImage from '../../public/family-image1.png'
-import pettingDogImage from '../../public/petting-dog.png'
-import heroAboutUs from '../../public/hero_about_us.png'
-import pawsImage from '../../public/Paws.png'
-
 export function getStaticProps () {
   return { props: { title: 'About Us' } }
 }
@@ -18,14 +13,14 @@ export default function AboutUs () {
     <main>
       <HeroSmall
         headerText='About Us'
-        backgroundImage={heroAboutUs}
+        backgroundImage='/hero_about_us.png'
       />
       <About
         title='Jordyn Siordia and Dylan Baquero'
         paragraphs={aboutUsContent}
-        image1={familyImage}
-        image2={pettingDogImage}
-        paws={pawsImage}
+        image1='/family-image1.png'
+        image2='/petting-dog.png'
+        paws='/Paws.png'
       />
       <FooterCTA />
     </main>
