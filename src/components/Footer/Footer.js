@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <InViewLoad>
-        <img src='/hero_bg.png' alt='Footer Background' className={styles.bgImage} />
+        <img src='/hero_bg.webp' alt='Footer Background' className={styles.bgImage} />
       </InViewLoad>
       <div className={`${styles.footerContainer} container`}>
         <div className={styles.footerLeft}>
