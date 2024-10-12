@@ -40,17 +40,14 @@ const Testimonials = ({ title, testimonials }) => {
         <Carousel
           ref={carousel}
           responsive={responsive}
+          renderArrowsWhenDisabled
           ssr
-          arrows={false}
+          arrows
           swipeable
           draggable
-          infinite
-          autoPlay
           containerClass={styles.testimonials}
           itemClass={styles.testimonialsItem}
           deviceType='desktop'
-          transitionDuration={8000}
-          customTransition='all 1s'
         >
           {renderTestimonials()}
         </Carousel>
