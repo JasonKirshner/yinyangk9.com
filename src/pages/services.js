@@ -21,10 +21,10 @@ const services = [
     image: '/boarding.webp',
     name: 'Boarding',
     code: 'boarding',
-    description: 'Available exclusively to dogs who have completed previous training with us. Leave your dog with peace of mind, knowing that they are receiving the same level of care and attention they would at home. Your pup will have structured days, with training consistently upheld.',
+    description: 'Available exclusively to dogs who have completed previous training with us. Leave your dog with peace of mind, knowing that they are receiving the same level of care and attention they would at home. Your pup will have structured days, with training consistently upheld. Check in time for boarding is 3pm! Includes train & play days if applicable.',
     pricingDetails: [
-      'Rate: $100 (includes Train & Play days if applicable)',
-      'Train & Play Member Rate: $75'
+      'Rate: $100 a night',
+      'Train & Play Member Rate: $75 a night'
     ]
   },
   {
@@ -33,7 +33,7 @@ const services = [
     code: 'train-n-play',
     description: 'Available exclusively to dogs who have completed previous training with us. Train & Play is not your typical dog daycare. It’s a small select group of dogs with structure implemented throughout the day. Along with play, they also receive mental enrichment, socially appropriate play groups, and the possibility of field trips.',
     pricingDetails: [
-      'Hours: 7:30am-5:30 pm',
+      'Hours: 8am-5pm',
       'Daily Rate: $95',
       'Monthly Rate: $642'
     ]
