@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className={`${styles.navbarContainer} container`}>
         <InViewLoad>
-          <Link className={styles.homeLink} href='/'>
+          <Link className={styles.homeLink} href='/' onClick={toggleMenu}>
             <img src='/logo.webp' alt='Logo' className={styles.logo} priority />
           </Link>
         </InViewLoad>
