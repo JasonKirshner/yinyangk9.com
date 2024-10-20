@@ -10,8 +10,12 @@
 
 .image {
   width: 100%;
-  aspect-ratio: 1.5;
+  aspect-ratio: 1.4;
   object-fit: cover;
+
+  .service:last-child &  {
+    object-position: 0 20%;
+  }
 }
 
 .pricing {
