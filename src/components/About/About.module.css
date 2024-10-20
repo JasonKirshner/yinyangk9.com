@@ -42,8 +42,8 @@
   }
 
   @media(--md) {
-    object-position: 0 20%;
-    aspect-ratio: 1.8;
+    object-position: 0 40%;
+    aspect-ratio: 1;
     margin-top: 20px;
   }
 }
