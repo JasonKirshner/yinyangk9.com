@@ -39,7 +39,7 @@ const services = [
     ]
   },
   {
-    image: '/privatelessons.webp',
+    image: '/privatelessons2.webp',
     name: 'Private Lessons',
     code: 'private-lessons',
     description: 'We provide a customized training plan for each dog based on your training goals. Like people, every dog is unique in what they need. Whether you want to work on the fundamentals for a new puppy or have been struggling with a specific issue with your dog, we are here to help! Our private lessons are focused on teaching you, the dog parent(s) how to successfully balance your communication and strengthen the bond with your dog.',
