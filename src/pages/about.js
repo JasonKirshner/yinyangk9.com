@@ -13,12 +13,12 @@ export default function AboutUs () {
     <main>
       <HeroSmall
         headerText='About Us'
-        backgroundImage='/hero_about_us.png'
+        backgroundImage='/hero_about_us.webp'
       />
       <About
         title='Jordyn Siordia and Dylan Baquero'
         paragraphs={aboutUsContent}
-        image1='/family-image1.png'
+        image1='/family-image1.webp'
         image2='/petting-dog.webp'
         paws='/Paws.webp'
       />

@@ -28,7 +28,7 @@ const services = [
     ]
   },
   {
-    image: '/trainnplay.png',
+    image: '/trainnplay.webp',
     name: 'Train & Play',
     code: 'train-n-play',
     description: 'Available exclusively to dogs who have completed previous training with us. Train & Play is not your typical dog daycare. It’s a small select group of dogs with structure implemented throughout the day. Along with play, they also receive mental enrichment, socially appropriate play groups, and the possibility of field trips.',

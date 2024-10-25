@@ -14,7 +14,7 @@
   object-fit: cover;
 
   .service:last-child &  {
-    object-position: 0 20%;
+    object-position: 0 30%;
   }
 }
 

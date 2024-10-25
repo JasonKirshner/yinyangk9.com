@@ -20,7 +20,7 @@ const Hero = ({ title, description, buttonText1, buttonText2, image, bgImage }) 
           </div>
         </div>
         <InViewLoad>
-          <img src={image} alt='Hero Image' className={styles.image} />
+          <img src={image} alt='Hero Image' className={styles.image} fetchpriority='high' />
         </InViewLoad>
       </div>
     </div>

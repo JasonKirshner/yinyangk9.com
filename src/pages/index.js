@@ -12,13 +12,13 @@ import bgImage from '../../public/hero_bg.webp'
 
 const testimonials = [
   {
-    image: '/zara.jpeg',
+    image: '/zara.webp',
     dogName: 'Zara',
     testimony: 'If you are looking for a place where your Dog will be well Loved, cared for, have awesome doggie friends and learn good dog behavior, Yin Yang K9 is the place!',
     name: 'Barbara C.'
   },
   {
-    image: '/udon.jpeg',
+    image: '/udon.webp',
     dogName: 'Udon',
     testimony: 'My puppy, Udon has made immense progress since joining their "Train & Play" program, and you can just tell that they care so much about the well-being of the pups.',
     name: 'Sofia C.'
@@ -30,7 +30,7 @@ const testimonials = [
     name: 'Miriam G.'
   },
   {
-    image: '/ruby.png',
+    image: '/ruby.webp',
     dogName: 'Ruby',
     testimony: 'In just a few short weeks, our pup has already shown improvement with her separation anxiety and Jordyn and Dylan have given us tips and tricks on what to try at home.',
     name: 'Monique R.'
