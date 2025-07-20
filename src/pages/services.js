@@ -23,8 +23,7 @@ const services = [
     code: 'boarding',
     description: 'Available exclusively to dogs who have completed previous training with us. Leave your dog with peace of mind, knowing that they are receiving the same level of care and attention they would at home. Your pup will have structured days, with training consistently upheld. Check in time for boarding is 3pm! Includes train & play days if applicable.',
     pricingDetails: [
-      'Rate: $100 a night',
-      'Train & Play Member Rate: $75 a night'
+      'Rate: $100 a night'
     ]
   },
   {
@@ -44,7 +43,8 @@ const services = [
     code: 'private-lessons',
     description: 'We provide a customized training plan for each dog based on your training goals. Like people, every dog is unique in what they need. Whether you want to work on the fundamentals for a new puppy or have been struggling with a specific issue with your dog, we are here to help! Our private lessons are focused on teaching you, the dog parent(s) how to successfully balance your communication and strengthen the bond with your dog.',
     pricingDetails: [
-      'Single Lesson Rate: $140'
+      'Single Lesson Rate: $140',
+      'Six Pack Lesson Rate: $600'
     ]
   }
 ]
