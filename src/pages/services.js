@@ -34,7 +34,7 @@ const services = [
     pricingDetails: [
       'Hours: 8am-5pm',
       'Daily Rate: $95',
-      'Monthly Rate: $642'
+      'Monthly Rate: $700'
     ]
   },
   {
@@ -43,8 +43,8 @@ const services = [
     code: 'private-lessons',
     description: 'We provide a customized training plan for each dog based on your training goals. Like people, every dog is unique in what they need. Whether you want to work on the fundamentals for a new puppy or have been struggling with a specific issue with your dog, we are here to help! Our private lessons are focused on teaching you, the dog parent(s) how to successfully balance your communication and strengthen the bond with your dog.',
     pricingDetails: [
-      'Single Lesson Rate: $140',
-      'Six Pack Lesson Rate: $600'
+      'Hourly Lesson Rate (With two trainers): $200',
+      'Six Pack Hourly Lesson Rate: $900'
     ]
   }
 ]
